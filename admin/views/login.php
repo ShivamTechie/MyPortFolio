@@ -25,8 +25,8 @@
 
             <div class="alert alert-error" id="clientError" style="display: none;"></div>
 
-            <form action="<?php echo ADMIN_URL; ?>?page=authenticate" method="POST" class="login-form" id="loginForm">
-                <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
+            <form id="loginForm" class="login-form">
+                <input type="hidden" id="csrf_token" value="<?php echo $csrfToken; ?>">
                 
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -51,7 +51,9 @@
             </div>
 
             <script>
-                document.getElementById('loginForm').addEventListener('submit', function(e) {
+                document.getElementById('loginForm').addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
                     // Clear previous errors
                     document.getElementById('usernameError').textContent = '';
                     document.getElementById('passwordError').textContent = '';
@@ -60,6 +62,7 @@
                     // Get values
                     const username = document.getElementById('username').value.trim();
                     const password = document.getElementById('password').value;
+                    const csrfToken = document.getElementById('csrf_token').value;
                     
                     // Basic validation
                     let hasError = false;
@@ -74,15 +77,43 @@
                         hasError = true;
                     }
                     
-                    if (hasError) {
-                        e.preventDefault();
-                        return false;
-                    }
+                    if (hasError) return;
                     
                     // Show loading
                     document.getElementById('btnText').style.display = 'none';
                     document.getElementById('btnLoader').style.display = 'inline';
                     document.getElementById('loginBtn').disabled = true;
+                    
+                    // AJAX Login
+                    try {
+                        const formData = new FormData();
+                        formData.append('username', username);
+                        formData.append('password', password);
+                        formData.append('csrf_token', csrfToken);
+                        
+                        const response = await fetch('<?php echo ADMIN_URL; ?>/authenticate.php', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                            window.location.href = data.redirect;
+                        } else {
+                            document.getElementById('clientError').textContent = data.message;
+                            document.getElementById('clientError').style.display = 'block';
+                            document.getElementById('btnText').style.display = 'inline';
+                            document.getElementById('btnLoader').style.display = 'none';
+                            document.getElementById('loginBtn').disabled = false;
+                        }
+                    } catch (error) {
+                        document.getElementById('clientError').textContent = 'Login failed. Please try again.';
+                        document.getElementById('clientError').style.display = 'block';
+                        document.getElementById('btnText').style.display = 'inline';
+                        document.getElementById('btnLoader').style.display = 'none';
+                        document.getElementById('loginBtn').disabled = false;
+                    }
                 });
             </script>
         </div>
