@@ -127,6 +127,17 @@ body {
     margin: 5px 0;
 }
 
+.error-message {
+    color: #c33;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+}
+
+#clientError {
+    margin: 20px 30px 0;
+}
+
 @media (max-width: 480px) {
     .login-header h1 {
         font-size: 24px;
