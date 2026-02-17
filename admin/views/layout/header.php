@@ -64,10 +64,6 @@
                     <?php endif; ?>
                 </a></li>
                 
-                <li><a href="<?php echo ADMIN_URL; ?>?page=change-password" class="<?php echo (isset($_GET['page']) && $_GET['page'] == 'change-password') ? 'active' : ''; ?>">
-                    <i class="fas fa-key"></i> Change Password
-                </a></li>
-                
                 <li><a href="<?php echo BASE_URL; ?>" target="_blank">
                     <i class="fas fa-external-link-alt"></i> View Website
                 </a></li>

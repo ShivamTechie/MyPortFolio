@@ -47,8 +47,7 @@
             </form>
 
             <div class="login-footer">
-                <p>Default credentials: admin / admin123</p>
-                <p>Please change password after first login</p>
+                <p>Login with your credentials</p>
             </div>
 
             <script>
