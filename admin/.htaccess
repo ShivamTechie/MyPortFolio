@@ -5,10 +5,13 @@
     RewriteEngine On
     RewriteBase /admin/
     
-    # Redirect to index.php
+    # Don't rewrite if file or directory exists
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php [QSA,L]
+    # Don't rewrite index.php itself
+    RewriteCond %{REQUEST_URI} !^/admin/index\.php
+    # Redirect to index.php, preserve POST data with [P,QSA]
+    RewriteRule ^(.*)$ index.php?page=$1 [QSA,L]
 </IfModule>
 
 # Security Headers
