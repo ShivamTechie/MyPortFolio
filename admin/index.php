@@ -30,12 +30,16 @@ if ($request !== 'login' && $request !== 'authenticate') {
     }
 }
 
+// Convert kebab-case to PascalCase (e.g., change-password => ChangePassword)
+$controllerName = str_replace('-', ' ', $request);
+$controllerName = str_replace(' ', '', ucwords($controllerName));
+
 // Route to appropriate controller
-$controllerFile = ADMIN_PATH . '/controllers/' . ucfirst($request) . 'Controller.php';
+$controllerFile = ADMIN_PATH . '/controllers/' . $controllerName . 'Controller.php';
 
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
-    $controllerClass = ucfirst($request) . 'Controller';
+    $controllerClass = $controllerName . 'Controller';
     $controller = new $controllerClass();
 } else {
     // Default to dashboard
