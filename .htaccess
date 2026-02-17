@@ -1,0 +1,9 @@
+# Portfolio Website - Root .htaccess
+# Redirect to public directory
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^$ public/ [L]
+    RewriteRule (.*) public/$1 [L]
+</IfModule>

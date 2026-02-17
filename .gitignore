@@ -1,0 +1,25 @@
+# Config file with passwords
+config/config.php
+
+# Uploads directory
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Vendor directory (can be regenerated)
+vendor/
+
+# IDE files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.log
+*.tmp
+*.swp
+composer.phar
+*.tar.gz
+*.zip
