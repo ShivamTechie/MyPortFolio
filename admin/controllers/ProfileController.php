@@ -4,9 +4,10 @@
  * Manage Profile Information
  */
 
+require_once ADMIN_PATH . '/controllers/BaseController.php';
 require_once APP_PATH . '/models/Profile.php';
 
-class ProfileController {
+class ProfileController extends BaseController {
     private $profileModel;
 
     public function __construct() {

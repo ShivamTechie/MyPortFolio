@@ -163,28 +163,18 @@
 				<div class="col-lg-12">
 					<h3 class="mb-4 text-center">Technical Skills</h3>
 					<div class="row">
-						<?php 
-						$skillsByCategory = [];
-						foreach ($skills as $skill) {
-							$category = $skill['category'] ?? 'Other';
-							if (!isset($skillsByCategory[$category])) {
-								$skillsByCategory[$category] = [];
-							}
-							$skillsByCategory[$category][] = $skill;
-						}
-						foreach ($skillsByCategory as $category => $categorySkills): 
-						?>
+						<?php foreach ($skills as $category => $categorySkills): ?>
 						<div class="col-lg-3 col-md-6 mb-4">
 							<div class="card h-100">
 								<div class="card-header bg-primary text-white">
 									<h6 class="mb-0"><?php echo htmlspecialchars($category); ?></h6>
 								</div>
 								<div class="card-body">
-									<ul class="list-unstyled">
+									<ul class="list-unstyled mb-0">
 										<?php foreach ($categorySkills as $skill): ?>
-										<li class="mb-2">
-											<strong><?php echo htmlspecialchars($skill['name']); ?></strong>
-											<span class="badge badge-secondary float-right"><?php echo htmlspecialchars($skill['proficiency']); ?></span>
+										<li class="mb-2 d-flex justify-content-between align-items-center">
+											<span><?php echo htmlspecialchars($skill['name']); ?></span>
+											<span class="badge badge-secondary"><?php echo htmlspecialchars($skill['proficiency']); ?></span>
 										</li>
 										<?php endforeach; ?>
 									</ul>
