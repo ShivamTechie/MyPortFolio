@@ -1,7 +1,7 @@
 <div class="content-section">
     <h1>Profile Management</h1>
     
-    <form id="profileForm" action="<?php echo ADMIN_URL; ?>?page=profile" method="POST" enctype="multipart/form-data" data-ajax="true">
+    <form id="profileForm" action="<?php echo ADMIN_URL; ?>/ajax/profile-update.php" method="POST" enctype="multipart/form-data" data-ajax="true">
         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
         
         <div class="form-group">

@@ -84,10 +84,28 @@ console.log('jQuery available:', typeof jQuery !== 'undefined');
                 }
             },
             error: function(xhr, status, error) {
-                console.error('AJAX Error:', error);
-                console.error('Response Status:', xhr.status);
-                console.error('Response Text:', xhr.responseText);
-                showNotification('An error occurred. Please try again.', 'error');
+                console.error('❌ AJAX Error:', error);
+                console.error('📊 Response Status:', xhr.status);
+                console.error('📄 Response Text:', xhr.responseText);
+                console.error('🔍 Status Text:', status);
+                
+                let errorMessage = 'An error occurred. Please try again.';
+                
+                // Try to parse error response
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.message) {
+                        errorMessage = response.message;
+                    }
+                } catch (e) {
+                    // If not JSON, show first 100 chars of response
+                    if (xhr.responseText && xhr.responseText.length > 0) {
+                        console.error('⚠️ Server returned non-JSON:', xhr.responseText.substring(0, 200));
+                        errorMessage = 'Server error - check console for details';
+                    }
+                }
+                
+                showNotification(errorMessage, 'error');
             },
             complete: function() {
                 submitBtn.prop('disabled', false).html(originalBtnText);
