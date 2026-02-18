@@ -36,16 +36,26 @@ class ProfileController extends BaseController {
      * Update Profile
      */
     public function update() {
+        // Start output buffering to catch any stray output
+        ob_start();
+        
         $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
                   strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+        
+        // Debug logging
+        error_log("=== ProfileController::update() called ===");
+        error_log("Is AJAX: " . ($isAjax ? 'YES' : 'NO'));
+        error_log("X-Requested-With: " . ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? 'NOT SET'));
         
         // Verify CSRF token
         if (!isset($_POST['csrf_token']) || !Session::verifyCsrfToken($_POST['csrf_token'])) {
             if ($isAjax) {
+                ob_end_clean();
                 header('Content-Type: application/json');
                 echo json_encode(['success' => false, 'message' => 'Invalid request. Please refresh and try again.']);
                 exit;
             }
+            ob_end_clean();
             Session::flash('error', 'Invalid request.', 'error');
             header('Location: ' . ADMIN_URL . '?page=profile');
             exit;
@@ -66,10 +76,12 @@ class ProfileController extends BaseController {
         // Validate required fields
         if (empty($data['name']) || empty($data['title']) || empty($data['email'])) {
             if ($isAjax) {
+                ob_end_clean();
                 header('Content-Type: application/json');
                 echo json_encode(['success' => false, 'message' => 'Please fill in all required fields.']);
                 exit;
             }
+            ob_end_clean();
             Session::flash('error', 'Please fill in all required fields.', 'error');
             header('Location: ' . ADMIN_URL . '?page=profile');
             exit;
@@ -85,6 +97,7 @@ class ProfileController extends BaseController {
                 $data['profile_image'] = $imageName;
             } else {
                 if ($isAjax) {
+                    ob_end_clean();
                     header('Content-Type: application/json');
                     echo json_encode(['success' => false, 'message' => 'Failed to upload profile image.']);
                     exit;
@@ -102,6 +115,7 @@ class ProfileController extends BaseController {
                 $data['resume_path'] = $resumeName;
             } else {
                 if ($isAjax) {
+                    ob_end_clean();
                     header('Content-Type: application/json');
                     echo json_encode(['success' => false, 'message' => 'Failed to upload resume.']);
                     exit;
@@ -119,6 +133,8 @@ class ProfileController extends BaseController {
         
         if ($result) {
             if ($isAjax) {
+                // Clear any output buffer and send clean JSON
+                ob_end_clean();
                 header('Content-Type: application/json');
                 echo json_encode([
                     'success' => true, 
@@ -131,6 +147,8 @@ class ProfileController extends BaseController {
             Session::flash('success', 'Profile updated successfully!', 'success');
         } else {
             if ($isAjax) {
+                // Clear any output buffer and send clean JSON
+                ob_end_clean();
                 header('Content-Type: application/json');
                 echo json_encode([
                     'success' => false, 
@@ -142,6 +160,8 @@ class ProfileController extends BaseController {
             Session::flash('error', 'Failed to update profile.', 'error');
         }
 
+        // Clean buffer before redirect
+        ob_end_clean();
         header('Location: ' . ADMIN_URL . '?page=profile');
         exit;
     }

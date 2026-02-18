@@ -85,6 +85,8 @@ console.log('jQuery available:', typeof jQuery !== 'undefined');
             },
             error: function(xhr, status, error) {
                 console.error('AJAX Error:', error);
+                console.error('Response Status:', xhr.status);
+                console.error('Response Text:', xhr.responseText);
                 showNotification('An error occurred. Please try again.', 'error');
             },
             complete: function() {
