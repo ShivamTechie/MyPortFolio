@@ -93,7 +93,11 @@
     // Auto-convert all admin forms to AJAX
     $('form').not('.no-ajax').each(function() {
         $(this).attr('data-ajax', 'true');
+        console.log('Form converted to AJAX:', $(this).attr('action'));
     });
+    
+    console.log('Total forms found:', $('form').length);
+    console.log('Forms with AJAX:', $('form[data-ajax="true"]').length);
 
     // Delete with AJAX
     $(document).on('click', '.btn-delete, .delete-item', function(e) {

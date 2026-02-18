@@ -69,8 +69,8 @@
 					</div>
 					<div class="col-lg-5">
 						<div class="home_right_img">
-							<?php if (!empty($profile['profile_photo'])): ?>
-							<img class="" src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_photo']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>">
+							<?php if (!empty($profile['profile_image'])): ?>
+							<img class="" src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_image']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>">
 							<?php else: ?>
 							<img class="" src="<?php echo BASE_URL; ?>/public/assets/images/banner/home-right.png" alt="">
 							<?php endif; ?>
@@ -88,8 +88,8 @@
 			<div class="row justify-content-start align-items-center">
 				<div class="col-lg-5">
 					<div class="about_img">
-						<?php if (!empty($profile['profile_photo'])): ?>
-						<img class="" src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_photo']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>">
+						<?php if (!empty($profile['profile_image'])): ?>
+						<img class="" src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_image']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>">
 						<?php else: ?>
 						<img class="" src="<?php echo BASE_URL; ?>/public/assets/images/about-us.png" alt="">
 						<?php endif; ?>

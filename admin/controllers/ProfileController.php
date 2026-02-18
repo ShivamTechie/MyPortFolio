@@ -109,13 +109,22 @@ class ProfileController extends BaseController {
             }
         }
 
-        if ($this->profileModel->updateProfile($data)) {
+        // Debug: Log the update attempt
+        error_log("Profile Update Data: " . print_r($data, true));
+        
+        $result = $this->profileModel->updateProfile($data);
+        
+        // Debug: Log the result
+        error_log("Profile Update Result: " . ($result ? 'SUCCESS' : 'FAILED'));
+        
+        if ($result) {
             if ($isAjax) {
                 header('Content-Type: application/json');
                 echo json_encode([
                     'success' => true, 
                     'message' => 'Profile updated successfully! ✓',
-                    'reload' => true
+                    'reload' => true,
+                    'updated_data' => $data
                 ]);
                 exit;
             }
@@ -123,7 +132,11 @@ class ProfileController extends BaseController {
         } else {
             if ($isAjax) {
                 header('Content-Type: application/json');
-                echo json_encode(['success' => false, 'message' => 'Failed to update profile. Please try again.']);
+                echo json_encode([
+                    'success' => false, 
+                    'message' => 'Failed to update profile. Database update failed.',
+                    'debug_data' => $data
+                ]);
                 exit;
             }
             Session::flash('error', 'Failed to update profile.', 'error');
