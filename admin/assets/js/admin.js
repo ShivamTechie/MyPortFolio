@@ -330,6 +330,48 @@ console.log('jQuery available:', typeof jQuery !== 'undefined');
         $('[data-toggle="popover"]').popover();
     }
 
+    // Enhanced File Upload Preview
+    $('#profile_image').on('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                let preview = $('.current-image-preview');
+                if (preview.length === 0) {
+                    preview = $('<div class="current-image-preview"><p class="preview-label">New Image Preview:</p></div>');
+                    $('#profile_image').closest('.form-group').append(preview);
+                }
+                preview.find('img').remove();
+                preview.append('<img src="' + e.target.result + '" alt="Preview">');
+            };
+            reader.readAsDataURL(file);
+            
+            // Update label
+            $(this).siblings('.file-label').html('<i class="fas fa-check-circle"></i> Image Selected: ' + file.name);
+        }
+    });
+    
+    $('#resume').on('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            $(this).siblings('.file-label').html('<i class="fas fa-check-circle"></i> PDF Selected: ' + file.name);
+        }
+    });
+    
+    // Form Reset Handler
+    $('button[type="reset"]').on('click', function() {
+        setTimeout(function() {
+            $('.file-label').each(function() {
+                const target = $(this).attr('for');
+                if (target === 'profile_image') {
+                    $(this).html('<i class="fas fa-cloud-upload-alt"></i> Choose Image');
+                } else if (target === 'resume') {
+                    $(this).html('<i class="fas fa-file-upload"></i> Choose PDF');
+                }
+            });
+        }, 10);
+    });
+
     console.log('%c✅ Admin Panel AJAX Initialized', 'color: #4caf50; font-weight: bold;');
     
     }); // End $(document).ready()
