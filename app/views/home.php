@@ -7,8 +7,15 @@
     <title><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?> - <?php echo htmlspecialchars($profile['title'] ?? ''); ?></title>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
@@ -32,26 +39,34 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <canvas id="heroCanvas"></canvas>
         <div class="container">
             <div class="hero-content">
+                <span class="hero-label">👋 WELCOME TO MY WORLD</span>
                 <h1 class="hero-title">Hi, I'm <span class="highlight"><?php echo htmlspecialchars($profile['name'] ?? ''); ?></span></h1>
                 <h2 class="hero-subtitle"><?php echo htmlspecialchars($profile['title'] ?? ''); ?></h2>
                 <p class="hero-description"><?php echo htmlspecialchars($profile['bio'] ?? ''); ?></p>
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Get In Touch</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                     <?php if (!empty($profile['resume_path'])): ?>
-                    <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" class="btn btn-outline" target="_blank">Download CV</a>
+                    <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" class="btn btn-outline" target="_blank">
+                        <i class="fas fa-download"></i>
+                        <span>Download CV</span>
+                    </a>
                     <?php endif; ?>
                 </div>
                 <div class="social-links">
                     <?php if (!empty($profile['linkedin'])): ?>
-                    <a href="<?php echo $profile['linkedin']; ?>" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="<?php echo $profile['linkedin']; ?>" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                     <?php endif; ?>
                     <?php if (!empty($profile['github'])): ?>
-                    <a href="<?php echo $profile['github']; ?>" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="<?php echo $profile['github']; ?>" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <?php endif; ?>
                     <?php if (!empty($profile['twitter'])): ?>
-                    <a href="<?php echo $profile['twitter']; ?>" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="<?php echo $profile['twitter']; ?>" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -290,6 +305,8 @@
         </div>
     </footer>
 
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="<?php echo BASE_URL; ?>/public/assets/js/script.js"></script>
 </body>
 </html>
