@@ -1,7 +1,10 @@
 <div class="content-section">
     <h1><?php echo isset($item) ? 'Edit' : 'Add'; ?> Skill</h1>
-    <form method="POST">
+    <form action="<?php echo ADMIN_URL; ?>/ajax/skill-save.php" method="POST" data-ajax="true">
         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
+        <?php if (isset($item)): ?>
+        <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
+        <?php endif; ?>
         <div class="form-group">
             <label for="name">Skill Name *</label>
             <input type="text" id="name" name="name" class="form-control" value="<?php echo htmlspecialchars($item['name'] ?? ''); ?>" required>

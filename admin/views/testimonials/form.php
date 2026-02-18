@@ -1,7 +1,10 @@
 <div class="content-section">
     <h1><?php echo isset($item) ? 'Edit' : 'Add'; ?> Testimonial</h1>
-    <form method="POST">
+    <form action="<?php echo ADMIN_URL; ?>/ajax/testimonial-save.php" method="POST" data-ajax="true">
         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
+        <?php if (isset($item)): ?>
+        <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
+        <?php endif; ?>
         <div class="form-group">
             <label for="client_name">Client Name *</label>
             <input type="text" id="client_name" name="client_name" class="form-control" value="<?php echo htmlspecialchars($item['client_name'] ?? ''); ?>" required>

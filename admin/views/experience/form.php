@@ -1,8 +1,11 @@
 <div class="content-section">
     <h1><?php echo isset($item) ? 'Edit' : 'Add'; ?> Experience</h1>
 
-    <form method="POST">
+    <form action="<?php echo ADMIN_URL; ?>/ajax/experience-save.php" method="POST" data-ajax="true">
         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
+        <?php if (isset($item)): ?>
+        <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
+        <?php endif; ?>
 
         <div class="form-group">
             <label for="company">Company *</label>
