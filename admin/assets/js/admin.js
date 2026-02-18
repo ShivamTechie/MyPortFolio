@@ -1,6 +1,11 @@
 // Admin Panel JavaScript with AJAX
+console.log('%c🚀 Admin.js file loaded', 'color: blue; font-weight: bold;');
+console.log('jQuery available:', typeof jQuery !== 'undefined');
+
 (function($) {
     'use strict';
+    
+    console.log('%c✓ Inside jQuery wrapper', 'color: green;');
 
     // Notification System
     function showNotification(message, type = 'success') {
@@ -25,6 +30,10 @@
             });
         }, 5000);
     }
+
+    // Wait for DOM to be ready
+    $(document).ready(function() {
+        console.log('%c✓ DOM Ready - Initializing Admin Panel', 'color: green; font-weight: bold;');
 
     // Auto-hide existing alerts
     $('.alert').each(function() {
@@ -301,7 +310,9 @@
         $('[data-toggle="popover"]').popover();
     }
 
-    console.log('%c✅ Admin Panel AJAX Loaded', 'color: #4caf50; font-weight: bold;');
+    console.log('%c✅ Admin Panel AJAX Initialized', 'color: #4caf50; font-weight: bold;');
+    
+    }); // End $(document).ready()
 
 })(jQuery);
 

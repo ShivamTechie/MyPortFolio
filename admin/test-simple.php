@@ -9,7 +9,7 @@ echo "=== SIMPLE TEST ===\n\n";
 echo "✓ PHP is working\n\n";
 
 // Test 2: Config file
-require_once '../config/config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 echo "✓ Config loaded\n";
 echo "DB_NAME: " . DB_NAME . "\n\n";
 
