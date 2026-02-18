@@ -154,7 +154,7 @@
                     <?php if (!empty($profile['profile_image'])): ?>
                     <img class="img-fluid" src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_image']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>">
                     <?php else: ?>
-                    <img class="img-fluid" src="<?php echo BASE_URL; ?>/public/assets/images/profile.png" alt="">
+                    <img class="img-fluid" src="<?php echo BASE_URL; ?>/public/assets/images/shivam.jpg" alt="">
                     <?php endif; ?>
                 </div>
             </div>
