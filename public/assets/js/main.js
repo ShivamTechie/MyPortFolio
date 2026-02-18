@@ -1,27 +1,16 @@
 (function ($) {
     "use strict";
-
-    // Spinner
-    var spinner = function () {
-        setTimeout(function () {
-            if ($('#spinner').length > 0) {
-                $('#spinner').removeClass('show');
-            }
-        }, 1);
-    };
-    spinner();
-    
     
     // Initiate the wowjs
     new WOW().init();
 
 
-    // Navbar on scrolling
+    // Navbar sticky and shadow on scroll
     $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
-            $('.navbar').fadeIn('slow').css('display', 'flex');
+        if ($(this).scrollTop() > 50) {
+            $('.navbar').addClass('shadow');
         } else {
-            $('.navbar').fadeOut('slow').css('display', 'none');
+            $('.navbar').removeClass('shadow');
         }
     });
 

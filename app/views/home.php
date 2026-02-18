@@ -29,41 +29,106 @@
 
     <!-- Template Stylesheet -->
     <link href="<?php echo BASE_URL; ?>/public/assets/css/style.css" rel="stylesheet">
+    
+    <style>
+        /* Custom Navigation Styles */
+        .navbar {
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand h3 {
+            font-size: 1.8rem;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .navbar .nav-link {
+            font-weight: 500;
+            color: #495057 !important;
+            padding: 8px 16px !important;
+            margin: 0 2px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: #667eea !important;
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .navbar .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 5px 10px;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        /* Adjust header spacing */
+        .container-fluid.bg-light.my-6 {
+            margin-top: 80px !important;
+        }
+        
+        @media (max-width: 991px) {
+            .navbar .btn-primary {
+                margin-top: 10px;
+                width: 100%;
+            }
+            
+            .navbar .nav-link {
+                padding: 10px 15px !important;
+            }
+        }
+    </style>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
-    <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <!-- Spinner End -->
-
     <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light fixed-top shadow py-lg-0 px-4 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-        <a href="#home" class="navbar-brand d-block d-lg-none">
-            <h1 class="text-primary fw-bold m-0"><?php echo htmlspecialchars(explode(' ', $profile['name'] ?? 'ProMan')[0]); ?></h1>
-        </a>
-        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between py-4 py-lg-0" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-0">
-                <a href="#home" class="nav-item nav-link active">Home</a>
-                <a href="#about" class="nav-item nav-link">About</a>
-                <a href="#skill" class="nav-item nav-link">Skills</a>
-                <a href="#service" class="nav-item nav-link">Services</a>
-            </div>
-            <a href="#home" class="navbar-brand bg-secondary py-3 px-4 mx-3 d-none d-lg-block">
-                <h1 class="text-primary fw-bold m-0"><?php echo htmlspecialchars(explode(' ', $profile['name'] ?? 'ProMan')[0]); ?></h1>
+    <nav class="navbar navbar-expand-lg bg-white navbar-light fixed-top shadow-sm">
+        <div class="container">
+            <a href="#home" class="navbar-brand">
+                <h3 class="text-primary fw-bold m-0"><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?></h3>
             </a>
-            <div class="navbar-nav me-auto py-0">
-                <a href="#project" class="nav-item nav-link">Projects</a>
-                <?php if (!empty($testimonials)): ?>
-                <a href="#testimonial" class="nav-item nav-link">Testimonial</a>
-                <?php endif; ?>
-                <a href="#contact" class="nav-item nav-link">Contact</a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto">
+                    <a href="#home" class="nav-item nav-link active">Home</a>
+                    <a href="#about" class="nav-item nav-link">About</a>
+                    <a href="#skill" class="nav-item nav-link">Skills</a>
+                    <a href="#service" class="nav-item nav-link">Services</a>
+                    <a href="#project" class="nav-item nav-link">Projects</a>
+                    <?php if (!empty($testimonials)): ?>
+                    <a href="#testimonial" class="nav-item nav-link">Testimonial</a>
+                    <?php endif; ?>
+                    <a href="#contact" class="nav-item nav-link">Contact</a>
+                    <?php if (!empty($profile['resume_path'])): ?>
+                    <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" 
+                       class="btn btn-primary ms-3 px-4 py-2" download>
+                        <i class="fas fa-download me-2"></i>Download CV
+                    </a>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </nav>
