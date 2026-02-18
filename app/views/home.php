@@ -15,6 +15,10 @@
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/magnific-popup.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/vendors/nice-select/css/nice-select.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/style.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/custom-enhancements.css">
+	
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -328,9 +332,9 @@
 			<div class="row justify-content-center align-items-center">
 				<div class="col-lg-10">
 					<div class="subscription_box text-center">
-						<h2 class="text-uppercase text-white">Get In Touch</h2>
+						<h2 class="text-uppercase text-white">Let's Work Together</h2>
 						<p class="text-white mb-4">
-							Feel free to contact me for any work or suggestions below
+							Have a project in mind? Let's discuss how I can help bring your ideas to life.
 						</p>
 						<form id="contactForm" class="subscription relative">
 							<div class="row">
@@ -348,10 +352,12 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 mb-3">
-									<textarea name="message" class="form-control" rows="4" placeholder="Your Message *" required></textarea>
+									<textarea name="message" class="form-control" rows="5" placeholder="Tell me about your project... *" required></textarea>
 								</div>
 							</div>
-							<button type="submit" class="primary-btn hover d-inline">Send Message</button>
+							<button type="submit" class="primary-btn hover d-inline">
+								<i class="fa fa-paper-plane"></i> Send Message
+							</button>
 							<div id="formMessage" class="mt-3"></div>
 						</form>
 						

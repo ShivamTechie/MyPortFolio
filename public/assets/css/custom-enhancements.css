@@ -1,0 +1,511 @@
+/**
+ * Custom Enhancements for Portfolio Site
+ * Modern, responsive design improvements
+ */
+
+/* ===================================
+   Global Improvements
+   =================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===================================
+   Enhanced Header / Navigation
+   =================================== */
+
+.header_area {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+}
+
+.navbar-brand h3 {
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 10px;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.navbar-toggler .icon-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #667eea;
+    margin: 4px 0;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 80%;
+}
+
+/* ===================================
+   Enhanced Home Banner
+   =================================== */
+
+.home_banner_area {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+}
+
+.banner_content h1 {
+    font-weight: 700;
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.banner_content h5 {
+    font-size: 1.5rem;
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.primary_btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff !important;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.primary_btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.primary_btn.tr-bg {
+    background: transparent;
+    border: 2px solid #667eea;
+    color: #667eea !important;
+    box-shadow: none;
+}
+
+.primary_btn.tr-bg:hover {
+    background: #667eea;
+    color: #fff !important;
+}
+
+.home_right_img img {
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* ===================================
+   Section Titles
+   =================================== */
+
+.main_title {
+    margin-bottom: 50px;
+}
+
+.main_title h2 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.main_title h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+}
+
+/* ===================================
+   Enhanced Contact Section
+   =================================== */
+
+.newsletter_area {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter_area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') repeat-x bottom;
+    opacity: 0.3;
+}
+
+.subscription_box {
+    position: relative;
+    z-index: 1;
+}
+
+.subscription_box h2 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.subscription_box p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Enhanced Form Styling */
+#contactForm {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#contactForm .form-control {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 15px 20px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    color: #2c3e50;
+}
+
+#contactForm .form-control::placeholder {
+    color: #95a5a6;
+}
+
+#contactForm .form-control:focus {
+    outline: none;
+    background: #fff;
+    border-color: #fff;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+#contactForm textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+#contactForm button[type="submit"] {
+    background: #fff;
+    color: #667eea !important;
+    padding: 15px 50px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+#contactForm button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    background: #f8f9fa;
+}
+
+#contactForm button[type="submit"]:active {
+    transform: translateY(-1px);
+}
+
+#formMessage {
+    border-radius: 12px;
+    padding: 15px 20px;
+    font-weight: 500;
+}
+
+.contact_info {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact_info p {
+    font-size: 16px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.contact_info i {
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+/* ===================================
+   Skills Section Enhancement
+   =================================== */
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 15px 20px;
+}
+
+.card-header h6 {
+    color: #fff;
+    font-weight: 600;
+    margin: 0;
+}
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* ===================================
+   Portfolio / Projects Grid
+   =================================== */
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-item img {
+    transition: transform 0.5s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+
+@media (max-width: 991px) {
+    .banner_content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .banner_content h5 {
+        font-size: 1.2rem;
+    }
+    
+    .home_right_img {
+        margin-top: 40px;
+    }
+    
+    .main_title h2 {
+        font-size: 2rem;
+    }
+    
+    #contactForm {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .banner_content h1 {
+        font-size: 2rem;
+    }
+    
+    .banner_content h5 {
+        font-size: 1rem;
+    }
+    
+    .primary_btn {
+        padding: 12px 25px;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    
+    .subscription_box h2 {
+        font-size: 1.8rem;
+    }
+    
+    #contactForm {
+        padding: 25px 15px;
+    }
+    
+    #contactForm .form-control {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    .contact_info {
+        padding: 20px 15px;
+    }
+    
+    .contact_info p {
+        font-size: 14px;
+    }
+    
+    .contact_info i {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand h3 {
+        font-size: 1.2rem;
+    }
+    
+    .banner_content {
+        text-align: center;
+    }
+    
+    .banner_content .d-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .primary_btn {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+        margin: 5px 0;
+    }
+    
+    .main_title {
+        text-align: center;
+    }
+    
+    .main_title h2 {
+        font-size: 1.5rem;
+    }
+    
+    .main_title h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* ===================================
+   Loading Animation
+   =================================== */
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   Utility Classes
+   =================================== */
+
+.section_gap {
+    padding: 80px 0;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===================================
+   Print Styles
+   =================================== */
+
+@media print {
+    .header_area,
+    .newsletter_area,
+    .footer_area {
+        display: none;
+    }
+}
