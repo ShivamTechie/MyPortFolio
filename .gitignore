@@ -1,25 +1,25 @@
-# Config file with passwords
-config/config.php
-
-# Uploads directory
-public/uploads/*
-!public/uploads/.gitkeep
-
-# Vendor directory (can be regenerated)
-vendor/
+# Theme ZIP files
+*.zip
 
 # IDE files
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
-# System files
+# OS files
 .DS_Store
 Thumbs.db
 
-# Temporary files
+# Logs
 *.log
+debug.log
+
+# Temporary files
 *.tmp
-*.swp
-composer.phar
-*.tar.gz
-*.zip
+temp/
+
+# Upload directories (if you want to exclude user uploads)
+# public/uploads/*
+# !public/uploads/.gitkeep
