@@ -1,6 +1,10 @@
 # Theme ZIP files
 *.zip
 
+# Theme folders
+Jessica-1.0.0/
+satner-master/
+
 # IDE files
 .vscode/
 .idea/
