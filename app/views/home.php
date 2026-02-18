@@ -1,312 +1,417 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo htmlspecialchars($profile['title'] ?? 'Portfolio'); ?> - <?php echo htmlspecialchars($profile['name'] ?? ''); ?>">
-    <title><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?> - <?php echo htmlspecialchars($profile['title'] ?? ''); ?></title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?> - <?php echo htmlspecialchars($profile['title'] ?? ''); ?></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="<?php echo htmlspecialchars($profile['bio'] ?? 'Professional Portfolio'); ?>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+  <!-- Lightbox CSS -->
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/lightbox.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/style.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-    <!-- Loading Screen -->
-    <div class="loading" id="loading">
-        <div class="loader"></div>
-    </div>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <a href="#home" class="logo"><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?></a>
-            <div class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+  <!-- Loading Screen -->
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
+
+  <!-- SVG Icons -->
+  <svg style="display:none;">
+    <symbol id="menu" viewBox="0 0 24 24">
+      <path fill="black" d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m0 12a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m7-7a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2z" />
+    </symbol>
+  </svg>
+
+  <!-- Header -->
+  <header id="top" class="position-sticky top-0 start-0" style="z-index:10;">
+    <nav class="navbar bg-white fixed-top">
+      <div class="container-fluid">
+        <div class="d-flex align-items-center g-4">
+          <a class="navbar-brand d-flex" href="#home">
+            <h3 class="mb-0 fw-bold"><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?></h3>
+          </a>
+          <div class="icon px-5">
+            <?php if (!empty($profile['github'])): ?>
+            <a href="<?php echo $profile['github']; ?>" target="_blank" class="text-decoration-none">
+              <i class="fab fa-github" style="font-size: 20px;"></i>
+            </a>
+            <?php endif; ?>
+            <?php if (!empty($profile['linkedin'])): ?>
+            <a href="<?php echo $profile['linkedin']; ?>" target="_blank" class="text-decoration-none ms-3">
+              <i class="fab fa-linkedin" style="font-size: 20px;"></i>
+            </a>
+            <?php endif; ?>
+            <?php if (!empty($profile['twitter'])): ?>
+            <a href="<?php echo $profile['twitter']; ?>" target="_blank" class="text-decoration-none ms-3">
+              <i class="fab fa-twitter" style="font-size: 20px;"></i>
+            </a>
+            <?php endif; ?>
+            <?php if (!empty($profile['email'])): ?>
+            <a href="mailto:<?php echo $profile['email']; ?>" class="text-decoration-none ms-3">
+              <i class="fas fa-envelope" style="font-size: 20px;"></i>
+            </a>
+            <?php endif; ?>
+          </div>
+        </div>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon">
+            <svg class="text-primary menu" width="32" height="32">
+              <use xlink:href="#menu"></use>
+            </svg>
+          </span>
+        </button>
+        <div class="offcanvas offcanvas-end text-white bg-black" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <button type="button" class="btn-close btn-close-white ms-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav flex-grow-1 p-4">
+              <li class="nav-item">
+                <a class="nav-link active text-uppercase ls-4 text-white" href="#home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-uppercase ls-4 text-white" href="#about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-uppercase ls-4 text-white" href="#services">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-uppercase ls-4 text-white" href="#portfolio">Portfolio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-uppercase ls-4 text-white" href="#testimonials">Testimonials</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-uppercase ls-4 text-white" href="#contact">Contact</a>
+              </li>
             </ul>
+          </div>
         </div>
+      </div>
     </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <canvas id="heroCanvas"></canvas>
-        <div class="container">
-            <div class="hero-content">
-                <span class="hero-label">👋 WELCOME TO MY WORLD</span>
-                <h1 class="hero-title">Hi, I'm <span class="highlight"><?php echo htmlspecialchars($profile['name'] ?? ''); ?></span></h1>
-                <h2 class="hero-subtitle"><?php echo htmlspecialchars($profile['title'] ?? ''); ?></h2>
-                <p class="hero-description"><?php echo htmlspecialchars($profile['bio'] ?? ''); ?></p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">
-                        <span>Get In Touch</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <?php if (!empty($profile['resume_path'])): ?>
-                    <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" class="btn btn-outline" target="_blank">
-                        <i class="fas fa-download"></i>
-                        <span>Download CV</span>
-                    </a>
-                    <?php endif; ?>
+  <!-- Hero Banner -->
+  <section id="home">
+    <div class="container">
+      <div class="banner rounded-4 p-5" style="background-image: url(<?php echo BASE_URL; ?>/public/assets/images/banner.png); background-size: cover; background-repeat: no-repeat; background-position: center;">
+        <div class="text-content text-white py-5 my-5">
+          <p class="fs-4"><?php echo htmlspecialchars($profile['title'] ?? ''); ?></p>
+          <h1 class="display-1"><?php echo htmlspecialchars($profile['name'] ?? ''); ?></h1>
+        </div>
+        <div class="row text-uppercase bg-black rounded-4 p-3 mt-5 stats-row">
+          <div class="col-md-3 mb-3 mb-md-0">
+            <div class="d-flex align-items-center gap-4">
+              <h2 class="display-2 text-light mb-0">
+                <?php 
+                $totalExp = 0;
+                if (!empty($experience)) {
+                    foreach($experience as $exp) {
+                        $start = strtotime($exp['start_date']);
+                        $end = $exp['is_current'] ? time() : strtotime($exp['end_date']);
+                        $totalExp += ($end - $start) / (365*24*60*60);
+                    }
+                }
+                echo round($totalExp); 
+                ?>
+              </h2>
+              <p class="text-light-emphasis justify-content-center m-0 ls-4">Years of<br>experience</p>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3 mb-md-0">
+            <div class="d-flex align-items-center gap-4">
+              <h2 class="display-2 text-light mb-0"><?php echo count($projects ?? []); ?></h2>
+              <p class="text-light-emphasis justify-content-center m-0 ls-4">Projects<br>completed</p>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3 mb-md-0">
+            <div class="d-flex align-items-center gap-4">
+              <h2 class="display-2 text-light mb-0"><?php echo count($skills ?? []); ?>+</h2>
+              <p class="text-light-emphasis justify-content-center m-0 ls-4">Skills<br>mastered</p>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3 mb-md-0">
+            <div class="d-flex align-items-center gap-4">
+              <h2 class="display-2 text-light mb-0"><?php echo count($testimonials ?? []); ?></h2>
+              <p class="text-light-emphasis justify-content-center m-0 ls-4">Happy<br>clients</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="p-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <?php if (!empty($services)): ?>
+          <?php foreach (array_slice($services, 0, 3) as $service): ?>
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="d-flex gap-4 align-items-start">
+              <div class="icon">
+                <i class="fas fa-<?php echo htmlspecialchars($service['icon']); ?> text-primary" style="font-size: 50px;"></i>
+              </div>
+              <div class="text-md-start">
+                <h5><?php echo htmlspecialchars($service['title']); ?></h5>
+                <p class="postf"><?php echo htmlspecialchars(substr($service['description'], 0, 100)); ?>...</p>
+              </div>
+            </div>
+          </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
+    </div>
+  </section>
+
+  <!-- About (Education/Experience/Skills) Section -->
+  <section id="about">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Education -->
+        <div class="col-lg-4">
+          <div class="h-100 bg-yellow p-4 rounded-4">
+            <h3 class="mb-4">Education</h3>
+            <?php if (!empty($education)): ?>
+              <?php foreach ($education as $edu): ?>
+              <div class="py-3">
+                <p class="text-dark-emphasis mb-2"><?php echo htmlspecialchars($edu['year']); ?></p>
+                <h5><?php echo htmlspecialchars($edu['degree']); ?></h5>
+                <p class="text-dark-emphasis mb-2"><?php echo htmlspecialchars($edu['institution']); ?></p>
+                <p class="text-muted small">CGPA: <?php echo htmlspecialchars($edu['cgpa']); ?></p>
+              </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="col-lg-4">
+          <div class="h-100 bg-green p-4 rounded-4">
+            <h3 class="mb-4">Experience</h3>
+            <?php if (!empty($experience)): ?>
+              <?php foreach ($experience as $exp): ?>
+              <div class="py-3">
+                <p class="text-dark-emphasis mb-2">
+                  <?php echo date('Y', strtotime($exp['start_date'])); ?> - 
+                  <?php echo $exp['is_current'] ? 'Present' : date('Y', strtotime($exp['end_date'])); ?>
+                </p>
+                <h5><?php echo htmlspecialchars($exp['company']); ?>: <?php echo htmlspecialchars($exp['position']); ?></h5>
+                <p class="text-dark-emphasis"><?php echo htmlspecialchars(substr($exp['description'], 0, 150)); ?>...</p>
+              </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </div>
+
+        <!-- Skills Overview -->
+        <div class="col-lg-4">
+          <div class="h-100 bg-teal p-4 rounded-4">
+            <h3 class="mb-4">Top Skills</h3>
+            <?php if (!empty($skills)): ?>
+              <?php 
+              $topSkills = array_slice($skills, 0, 10);
+              foreach ($topSkills as $skill): 
+              ?>
+              <div class="py-2">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h6 class="mb-0"><?php echo htmlspecialchars($skill['name']); ?></h6>
+                  <span class="badge bg-dark"><?php echo htmlspecialchars($skill['proficiency']); ?></span>
                 </div>
-                <div class="social-links">
-                    <?php if (!empty($profile['linkedin'])): ?>
-                    <a href="<?php echo $profile['linkedin']; ?>" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <?php endif; ?>
-                    <?php if (!empty($profile['github'])): ?>
-                    <a href="<?php echo $profile['github']; ?>" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <?php endif; ?>
-                    <?php if (!empty($profile['twitter'])): ?>
-                    <a href="<?php echo $profile['twitter']; ?>" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-                    <?php endif; ?>
-                </div>
-            </div>
+              </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about" class="about section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p><?php echo nl2br(htmlspecialchars($profile['bio'] ?? '')); ?></p>
-                    <div class="contact-info">
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <span><?php echo htmlspecialchars($profile['email'] ?? ''); ?></span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-phone"></i>
-                            <span><?php echo htmlspecialchars($profile['phone'] ?? ''); ?></span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span><?php echo htmlspecialchars($profile['address'] ?? ''); ?></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="portfolio py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 mb-5">
+          <div class="section-header text-center">
+            <h2 class="display-4 fw-bold mb-3">My Work</h2>
+            <p class="lead">As a passionate developer, I'm dedicated to creating exceptional digital experiences.</p>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience section">
-        <div class="container">
-            <h2 class="section-title">Work Experience</h2>
-            <div class="timeline">
-                <?php if (!empty($experience)): ?>
-                    <?php foreach ($experience as $exp): ?>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3><?php echo htmlspecialchars($exp['position']); ?></h3>
-                            <h4><?php echo htmlspecialchars($exp['company']); ?></h4>
-                            <span class="timeline-date">
-                                <?php echo date('M Y', strtotime($exp['start_date'])); ?> - 
-                                <?php echo $exp['is_current'] ? 'Present' : date('M Y', strtotime($exp['end_date'])); ?>
-                            </span>
-                            <p><?php echo nl2br(htmlspecialchars($exp['description'])); ?></p>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+      <div class="grid p-0 clearfix row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <?php if (!empty($projects)): ?>
+          <?php foreach ($projects as $project): ?>
+          <div class="col portfolio-item">
+            <?php if (!empty($project['image'])): ?>
+            <a href="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" data-lightbox="portfolio" data-title="<?php echo htmlspecialchars($project['title']); ?>">
+              <img src="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" class="img-fluid rounded-4" alt="<?php echo htmlspecialchars($project['title']); ?>">
+            </a>
+            <?php endif; ?>
+            <div class="mt-3">
+              <h5><?php echo htmlspecialchars($project['title']); ?></h5>
+              <p class="postf small"><?php echo htmlspecialchars(substr($project['description'], 0, 80)); ?>...</p>
+              <?php if (!empty($project['project_link'])): ?>
+              <a href="<?php echo $project['project_link']; ?>" target="_blank" class="btn btn-sm btn-primary">View Project</a>
+              <?php endif; ?>
             </div>
-        </div>
-    </section>
+          </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
+    </div>
+  </section>
 
-    <!-- Education Section -->
-    <section id="education" class="education section">
-        <div class="container">
-            <h2 class="section-title">Education</h2>
-            <div class="education-grid">
-                <?php if (!empty($education)): ?>
-                    <?php foreach ($education as $edu): ?>
-                    <div class="education-card">
-                        <div class="education-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3><?php echo htmlspecialchars($edu['degree']); ?></h3>
-                        <h4><?php echo htmlspecialchars($edu['institution']); ?></h4>
-                        <p class="education-year"><?php echo $edu['year']; ?> • CGPA: <?php echo $edu['cgpa']; ?></p>
-                        <?php if (!empty($edu['description'])): ?>
-                        <p><?php echo htmlspecialchars($edu['description']); ?></p>
-                        <?php endif; ?>
-                    </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+  <!-- Testimonials Section -->
+  <?php if (!empty($testimonials)): ?>
+  <section id="testimonials">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="display-3">Testimonials</h2>
+      </div>
+
+      <div class="swiper testimonial-swiper">
+        <div class="swiper-wrapper">
+          <?php foreach ($testimonials as $testimonial): ?>
+          <div class="testimonial-card rounded-3 py-4 px-4 swiper-slide">
+            <div class="text-start">
+              <p class="mb-4">"<?php echo htmlspecialchars($testimonial['content']); ?>"</p>
+              <h5 class="mb-1"><?php echo htmlspecialchars($testimonial['client_name']); ?></h5>
+              <?php if (!empty($testimonial['company'])): ?>
+              <p class="postd mb-0"><?php echo htmlspecialchars($testimonial['company']); ?></p>
+              <?php endif; ?>
+              <div class="mt-2">
+                <?php for($i=0; $i<$testimonial['rating']; $i++): ?>
+                <i class="fas fa-star" style="color: var(--bs-primary);"></i>
+                <?php endfor; ?>
+              </div>
             </div>
+          </div>
+          <?php endforeach; ?>
         </div>
-    </section>
+        <div class="testimonial-swiper-pagination position-relative mt-5 text-center"></div>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills section">
-        <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-container">
-                <?php if (!empty($skills)): ?>
-                    <?php foreach ($skills as $category => $categorySkills): ?>
-                    <div class="skill-category">
-                        <h3 class="category-title"><?php echo htmlspecialchars($category); ?></h3>
-                        <div class="skills-grid">
-                            <?php foreach ($categorySkills as $skill): ?>
-                            <div class="skill-item">
-                                <span class="skill-name"><?php echo htmlspecialchars($skill['name']); ?></span>
-                                <span class="skill-level skill-<?php echo strtolower($skill['proficiency']); ?>"><?php echo $skill['proficiency']; ?></span>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+  <!-- Contact Section -->
+  <section id="contact" class="p-5 bg-yellow py-5">
+    <div class="container">
+      <div class="row justify-content-center my-5">
+        <div class="col-md-5">
+          <h6>Quick Contact</h6>
+          <h2 class="display-3">Leave a Message</h2>
+          <p>Feel free to reach out for collaborations or just a friendly hello!</p>
+          <div class="mt-4">
+            <p><i class="fas fa-envelope me-2"></i> <?php echo htmlspecialchars($profile['email'] ?? ''); ?></p>
+            <p><i class="fas fa-phone me-2"></i> <?php echo htmlspecialchars($profile['phone'] ?? ''); ?></p>
+            <p><i class="fas fa-map-marker-alt me-2"></i> <?php echo htmlspecialchars($profile['address'] ?? ''); ?></p>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <form id="contactForm">
+            <div class="mb-3">
+              <input type="text" class="form-control p-3 rounded-4" name="name" placeholder="Your name *" required />
             </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects section">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <?php if (!empty($projects)): ?>
-                    <?php foreach ($projects as $project): ?>
-                    <div class="project-card">
-                        <?php if (!empty($project['image'])): ?>
-                        <div class="project-image">
-                            <img src="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" alt="<?php echo htmlspecialchars($project['title']); ?>">
-                        </div>
-                        <?php endif; ?>
-                        <div class="project-content">
-                            <h3><?php echo htmlspecialchars($project['title']); ?></h3>
-                            <p><?php echo htmlspecialchars($project['description']); ?></p>
-                            <?php if (!empty($project['technologies'])): ?>
-                            <div class="project-tags">
-                                <?php foreach (explode(',', $project['technologies']) as $tech): ?>
-                                <span class="tag"><?php echo trim(htmlspecialchars($tech)); ?></span>
-                                <?php endforeach; ?>
-                            </div>
-                            <?php endif; ?>
-                            <div class="project-links">
-                                <?php if (!empty($project['project_link'])): ?>
-                                <a href="<?php echo $project['project_link']; ?>" target="_blank" class="btn btn-small">View Project</a>
-                                <?php endif; ?>
-                                <?php if (!empty($project['github_link'])): ?>
-                                <a href="<?php echo $project['github_link']; ?>" target="_blank" class="btn btn-small btn-outline"><i class="fab fa-github"></i> Code</a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+            <div class="mb-3">
+              <input type="email" class="form-control p-3 rounded-4" name="email" placeholder="Your email *" required />
             </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services section">
-        <div class="container">
-            <h2 class="section-title">Services I Offer</h2>
-            <div class="services-grid">
-                <?php if (!empty($services)): ?>
-                    <?php foreach ($services as $service): ?>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-<?php echo htmlspecialchars($service['icon']); ?>"></i>
-                        </div>
-                        <h3><?php echo htmlspecialchars($service['title']); ?></h3>
-                        <p><?php echo htmlspecialchars($service['description']); ?></p>
-                    </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+            <div class="mb-3">
+              <input type="text" class="form-control p-3 rounded-4" name="subject" placeholder="Subject" />
             </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <?php if (!empty($testimonials)): ?>
-    <section id="testimonials" class="testimonials section">
-        <div class="container">
-            <h2 class="section-title">What Clients Say</h2>
-            <div class="testimonials-grid">
-                <?php foreach ($testimonials as $testimonial): ?>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p><?php echo htmlspecialchars($testimonial['content']); ?></p>
-                    </div>
-                    <div class="testimonial-footer">
-                        <div class="testimonial-author">
-                            <h4><?php echo htmlspecialchars($testimonial['client_name']); ?></h4>
-                            <?php if (!empty($testimonial['company'])): ?>
-                            <span><?php echo htmlspecialchars($testimonial['company']); ?></span>
-                            <?php endif; ?>
-                        </div>
-                        <div class="testimonial-rating">
-                            <?php for($i=0; $i<$testimonial['rating']; $i++): ?>
-                            <i class="fas fa-star"></i>
-                            <?php endfor; ?>
-                        </div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
+            <div class="mb-3">
+              <textarea class="form-control p-3 rounded-4" name="message" placeholder="Your message *" rows="3" required></textarea>
             </div>
-        </div>
-    </section>
-    <?php endif; ?>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-form-wrapper">
-                    <form id="contactForm" class="contact-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" name="name" placeholder="Your Name *" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="email" placeholder="Your Email *" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="subject" placeholder="Subject">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" placeholder="Your Message *" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                        <div id="formMessage" class="form-message"></div>
-                    </form>
-                </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-dark btn-lg text-uppercase rounded-4">Submit</button>
             </div>
+            <div id="formMessage" class="form-message mt-3"></div>
+          </form>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; <?php echo date('Y'); ?> <?php echo htmlspecialchars($profile['name'] ?? ''); ?>. All rights reserved.</p>
-            <div class="footer-links">
-                <?php if (!empty($profile['linkedin'])): ?>
-                <a href="<?php echo $profile['linkedin']; ?>" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <?php endif; ?>
-                <?php if (!empty($profile['github'])): ?>
-                <a href="<?php echo $profile['github']; ?>" target="_blank"><i class="fab fa-github"></i></a>
-                <?php endif; ?>
+  <!-- Footer -->
+  <footer id="footer" class="bg-black text-white py-5">
+    <div class="container-sm">
+      <div class="row g-md-5 my-5">
+        <div class="col-md-4">
+          <div class="info-box">
+            <h4 class="text-white mb-4"><?php echo htmlspecialchars($profile['name'] ?? ''); ?></h4>
+            <p class="py-4"><?php echo htmlspecialchars(substr($profile['bio'] ?? '', 0, 150)); ?>...</p>
+            <div class="social-links">
+              <?php if (!empty($profile['github'])): ?>
+              <a href="<?php echo $profile['github']; ?>" target="_blank" class="text-white me-3"><i class="fab fa-github fa-lg"></i></a>
+              <?php endif; ?>
+              <?php if (!empty($profile['linkedin'])): ?>
+              <a href="<?php echo $profile['linkedin']; ?>" target="_blank" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+              <?php endif; ?>
+              <?php if (!empty($profile['twitter'])): ?>
+              <a href="<?php echo $profile['twitter']; ?>" target="_blank" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+              <?php endif; ?>
             </div>
+          </div>
         </div>
-    </footer>
+        <div class="col-md-3">
+          <h6 class="text-white mb-3">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white-50" href="#home">Home</a></li>
+            <li><a class="text-decoration-none text-white-50" href="#about">About</a></li>
+            <li><a class="text-decoration-none text-white-50" href="#services">Services</a></li>
+            <li><a class="text-decoration-none text-white-50" href="#portfolio">Portfolio</a></li>
+            <li><a class="text-decoration-none text-white-50" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-5">
+          <h6 class="text-white mb-3">Get In Touch</h6>
+          <p>Feel free to contact if you wanna collaborate with me, or simply have a conversation.</p>
+          <h5>
+            <a href="mailto:<?php echo htmlspecialchars($profile['email'] ?? ''); ?>" class="text-white text-decoration-none">
+              <?php echo htmlspecialchars($profile['email'] ?? ''); ?>
+            </a>
+          </h5>
+        </div>
+      </div>
+      <div class="row">
+        <p class="text-center text-white-50">©<?php echo date('Y'); ?> <?php echo htmlspecialchars($profile['name'] ?? ''); ?>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/js/script.js"></script>
+  <!-- Bootstrap JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Lightbox JS -->
+  <script src="<?php echo BASE_URL; ?>/public/assets/js/lightbox.min.js"></script>
+
+  <!-- Custom JS -->
+  <script src="<?php echo BASE_URL; ?>/public/assets/js/script.js"></script>
 </body>
 </html>
