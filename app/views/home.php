@@ -1,417 +1,510 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?> - <?php echo htmlspecialchars($profile['title'] ?? ''); ?></title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="<?php echo htmlspecialchars($profile['bio'] ?? 'Professional Portfolio'); ?>">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-
-  <!-- Lightbox CSS -->
-  <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/lightbox.min.css">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/style.css">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="<?php echo BASE_URL; ?>/public/assets/images/favicon.png" type="image/png">
+	<title><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?> - <?php echo htmlspecialchars($profile['title'] ?? 'Professional Portfolio'); ?></title>
+	<meta name="description" content="<?php echo htmlspecialchars($profile['bio'] ?? ''); ?>">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/bootstrap.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/vendors/linericon/style.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/vendors/owl-carousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/vendors/nice-select/css/nice-select.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/assets/css/style.css">
 </head>
 
 <body>
-  <!-- Loading Screen -->
-  <div class="loading" id="loading">
-    <div class="loader"></div>
-  </div>
 
-  <!-- SVG Icons -->
-  <svg style="display:none;">
-    <symbol id="menu" viewBox="0 0 24 24">
-      <path fill="black" d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m0 12a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1m7-7a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2z" />
-    </symbol>
-  </svg>
+	<!--================ Start Header Area =================-->
+	<header class="header_area">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container">
+					<a class="navbar-brand logo_h" href="#home">
+						<h3 class="mb-0"><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?></h3>
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav justify-content-end">
+							<li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+							<li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+							<li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+							<li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<!--================ End Header Area =================-->
 
-  <!-- Header -->
-  <header id="top" class="position-sticky top-0 start-0" style="z-index:10;">
-    <nav class="navbar bg-white fixed-top">
-      <div class="container-fluid">
-        <div class="d-flex align-items-center g-4">
-          <a class="navbar-brand d-flex" href="#home">
-            <h3 class="mb-0 fw-bold"><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?></h3>
-          </a>
-          <div class="icon px-5">
-            <?php if (!empty($profile['github'])): ?>
-            <a href="<?php echo $profile['github']; ?>" target="_blank" class="text-decoration-none">
-              <i class="fab fa-github" style="font-size: 20px;"></i>
-            </a>
-            <?php endif; ?>
-            <?php if (!empty($profile['linkedin'])): ?>
-            <a href="<?php echo $profile['linkedin']; ?>" target="_blank" class="text-decoration-none ms-3">
-              <i class="fab fa-linkedin" style="font-size: 20px;"></i>
-            </a>
-            <?php endif; ?>
-            <?php if (!empty($profile['twitter'])): ?>
-            <a href="<?php echo $profile['twitter']; ?>" target="_blank" class="text-decoration-none ms-3">
-              <i class="fab fa-twitter" style="font-size: 20px;"></i>
-            </a>
-            <?php endif; ?>
-            <?php if (!empty($profile['email'])): ?>
-            <a href="mailto:<?php echo $profile['email']; ?>" class="text-decoration-none ms-3">
-              <i class="fas fa-envelope" style="font-size: 20px;"></i>
-            </a>
-            <?php endif; ?>
-          </div>
-        </div>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-          <span class="navbar-toggler-icon">
-            <svg class="text-primary menu" width="32" height="32">
-              <use xlink:href="#menu"></use>
-            </svg>
-          </span>
-        </button>
-        <div class="offcanvas offcanvas-end text-white bg-black" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
-            <button type="button" class="btn-close btn-close-white ms-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav flex-grow-1 p-4">
-              <li class="nav-item">
-                <a class="nav-link active text-uppercase ls-4 text-white" href="#home">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-uppercase ls-4 text-white" href="#about">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-uppercase ls-4 text-white" href="#services">Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-uppercase ls-4 text-white" href="#portfolio">Portfolio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-uppercase ls-4 text-white" href="#testimonials">Testimonials</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-uppercase ls-4 text-white" href="#contact">Contact</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
+	<!--================ Start Home Banner Area =================-->
+	<section class="home_banner_area" id="home">
+		<div class="banner_inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7">
+						<div class="banner_content">
+							<h3 class="text-uppercase">Hello</h3>
+							<h1 class="text-uppercase">I am <?php echo htmlspecialchars($profile['name'] ?? ''); ?></h1>
+							<h5 class="text-uppercase"><?php echo htmlspecialchars($profile['title'] ?? ''); ?></h5>
+							<div class="d-flex align-items-center">
+								<a class="primary_btn" href="#contact"><span>Hire Me</span></a>
+								<?php if (!empty($profile['resume_path'])): ?>
+								<a class="primary_btn tr-bg" href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" target="_blank"><span>Get CV</span></a>
+								<?php endif; ?>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-5">
+						<div class="home_right_img">
+							<?php if (!empty($profile['profile_photo'])): ?>
+							<img class="" src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_photo']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>">
+							<?php else: ?>
+							<img class="" src="<?php echo BASE_URL; ?>/public/assets/images/banner/home-right.png" alt="">
+							<?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================ End Home Banner Area =================-->
 
-  <!-- Hero Banner -->
-  <section id="home">
-    <div class="container">
-      <div class="banner rounded-4 p-5" style="background-image: url(<?php echo BASE_URL; ?>/public/assets/images/banner.png); background-size: cover; background-repeat: no-repeat; background-position: center;">
-        <div class="text-content text-white py-5 my-5">
-          <p class="fs-4"><?php echo htmlspecialchars($profile['title'] ?? ''); ?></p>
-          <h1 class="display-1"><?php echo htmlspecialchars($profile['name'] ?? ''); ?></h1>
-        </div>
-        <div class="row text-uppercase bg-black rounded-4 p-3 mt-5 stats-row">
-          <div class="col-md-3 mb-3 mb-md-0">
-            <div class="d-flex align-items-center gap-4">
-              <h2 class="display-2 text-light mb-0">
-                <?php 
-                $totalExp = 0;
-                if (!empty($experience)) {
-                    foreach($experience as $exp) {
-                        $start = strtotime($exp['start_date']);
-                        $end = $exp['is_current'] ? time() : strtotime($exp['end_date']);
-                        $totalExp += ($end - $start) / (365*24*60*60);
-                    }
-                }
-                echo round($totalExp); 
-                ?>
-              </h2>
-              <p class="text-light-emphasis justify-content-center m-0 ls-4">Years of<br>experience</p>
-            </div>
-          </div>
-          <div class="col-md-3 mb-3 mb-md-0">
-            <div class="d-flex align-items-center gap-4">
-              <h2 class="display-2 text-light mb-0"><?php echo count($projects ?? []); ?></h2>
-              <p class="text-light-emphasis justify-content-center m-0 ls-4">Projects<br>completed</p>
-            </div>
-          </div>
-          <div class="col-md-3 mb-3 mb-md-0">
-            <div class="d-flex align-items-center gap-4">
-              <h2 class="display-2 text-light mb-0"><?php echo count($skills ?? []); ?>+</h2>
-              <p class="text-light-emphasis justify-content-center m-0 ls-4">Skills<br>mastered</p>
-            </div>
-          </div>
-          <div class="col-md-3 mb-3 mb-md-0">
-            <div class="d-flex align-items-center gap-4">
-              <h2 class="display-2 text-light mb-0"><?php echo count($testimonials ?? []); ?></h2>
-              <p class="text-light-emphasis justify-content-center m-0 ls-4">Happy<br>clients</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+	<!--================ Start About Us Area =================-->
+	<section class="about_area section_gap" id="about">
+		<div class="container">
+			<div class="row justify-content-start align-items-center">
+				<div class="col-lg-5">
+					<div class="about_img">
+						<?php if (!empty($profile['profile_photo'])): ?>
+						<img class="" src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_photo']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>">
+						<?php else: ?>
+						<img class="" src="<?php echo BASE_URL; ?>/public/assets/images/about-us.png" alt="">
+						<?php endif; ?>
+					</div>
+				</div>
 
-  <!-- Services Section -->
-  <section id="services" class="p-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <?php if (!empty($services)): ?>
-          <?php foreach (array_slice($services, 0, 3) as $service): ?>
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="d-flex gap-4 align-items-start">
-              <div class="icon">
-                <i class="fas fa-<?php echo htmlspecialchars($service['icon']); ?> text-primary" style="font-size: 50px;"></i>
-              </div>
-              <div class="text-md-start">
-                <h5><?php echo htmlspecialchars($service['title']); ?></h5>
-                <p class="postf"><?php echo htmlspecialchars(substr($service['description'], 0, 100)); ?>...</p>
-              </div>
-            </div>
-          </div>
-          <?php endforeach; ?>
-        <?php endif; ?>
-      </div>
-    </div>
-  </section>
+				<div class="offset-lg-1 col-lg-5">
+					<div class="main_title text-left">
+						<h2>Let's <br>Introduce about <br>myself</h2>
+						<p><?php echo nl2br(htmlspecialchars($profile['bio'] ?? '')); ?></p>
+						<div class="mt-4">
+							<p><strong>Email:</strong> <?php echo htmlspecialchars($profile['email'] ?? ''); ?></p>
+							<p><strong>Phone:</strong> <?php echo htmlspecialchars($profile['phone'] ?? ''); ?></p>
+							<p><strong>Location:</strong> <?php echo htmlspecialchars($profile['address'] ?? ''); ?></p>
+						</div>
+						<?php if (!empty($profile['resume_path'])): ?>
+						<a class="primary_btn" href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" target="_blank"><span>Download CV</span></a>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================ End About Us Area =================-->
 
-  <!-- About (Education/Experience/Skills) Section -->
-  <section id="about">
-    <div class="container">
-      <div class="row g-4">
-        <!-- Education -->
-        <div class="col-lg-4">
-          <div class="h-100 bg-yellow p-4 rounded-4">
-            <h3 class="mb-4">Education</h3>
-            <?php if (!empty($education)): ?>
-              <?php foreach ($education as $edu): ?>
-              <div class="py-3">
-                <p class="text-dark-emphasis mb-2"><?php echo htmlspecialchars($edu['year']); ?></p>
-                <h5><?php echo htmlspecialchars($edu['degree']); ?></h5>
-                <p class="text-dark-emphasis mb-2"><?php echo htmlspecialchars($edu['institution']); ?></p>
-                <p class="text-muted small">CGPA: <?php echo htmlspecialchars($edu['cgpa']); ?></p>
-              </div>
-              <?php endforeach; ?>
-            <?php endif; ?>
-          </div>
-        </div>
+	<!--================ Start Experience/Education Area =================-->
+	<section class="brand_area section_gap_bottom">
+		<div class="container">
+			<div class="row">
+				<?php if (!empty($experience)): ?>
+				<div class="col-lg-6 mb-4">
+					<h3 class="mb-4">Work Experience</h3>
+					<?php foreach ($experience as $exp): ?>
+					<div class="card mb-3">
+						<div class="card-body">
+							<h5 class="card-title"><?php echo htmlspecialchars($exp['position']); ?></h5>
+							<h6 class="card-subtitle mb-2 text-muted"><?php echo htmlspecialchars($exp['company']); ?></h6>
+							<p class="text-muted small">
+								<?php echo date('M Y', strtotime($exp['start_date'])); ?> - 
+								<?php echo $exp['is_current'] ? 'Present' : date('M Y', strtotime($exp['end_date'])); ?>
+							</p>
+							<p class="card-text"><?php echo nl2br(htmlspecialchars($exp['description'])); ?></p>
+						</div>
+					</div>
+					<?php endforeach; ?>
+				</div>
+				<?php endif; ?>
 
-        <!-- Experience -->
-        <div class="col-lg-4">
-          <div class="h-100 bg-green p-4 rounded-4">
-            <h3 class="mb-4">Experience</h3>
-            <?php if (!empty($experience)): ?>
-              <?php foreach ($experience as $exp): ?>
-              <div class="py-3">
-                <p class="text-dark-emphasis mb-2">
-                  <?php echo date('Y', strtotime($exp['start_date'])); ?> - 
-                  <?php echo $exp['is_current'] ? 'Present' : date('Y', strtotime($exp['end_date'])); ?>
-                </p>
-                <h5><?php echo htmlspecialchars($exp['company']); ?>: <?php echo htmlspecialchars($exp['position']); ?></h5>
-                <p class="text-dark-emphasis"><?php echo htmlspecialchars(substr($exp['description'], 0, 150)); ?>...</p>
-              </div>
-              <?php endforeach; ?>
-            <?php endif; ?>
-          </div>
-        </div>
+				<?php if (!empty($education)): ?>
+				<div class="col-lg-6 mb-4">
+					<h3 class="mb-4">Education</h3>
+					<?php foreach ($education as $edu): ?>
+					<div class="card mb-3">
+						<div class="card-body">
+							<h5 class="card-title"><?php echo htmlspecialchars($edu['degree']); ?></h5>
+							<h6 class="card-subtitle mb-2 text-muted"><?php echo htmlspecialchars($edu['institution']); ?></h6>
+							<p class="text-muted small"><?php echo htmlspecialchars($edu['year']); ?> • CGPA: <?php echo htmlspecialchars($edu['cgpa']); ?></p>
+							<?php if (!empty($edu['description'])): ?>
+							<p class="card-text"><?php echo htmlspecialchars($edu['description']); ?></p>
+							<?php endif; ?>
+						</div>
+					</div>
+					<?php endforeach; ?>
+				</div>
+				<?php endif; ?>
+			</div>
 
-        <!-- Skills Overview -->
-        <div class="col-lg-4">
-          <div class="h-100 bg-teal p-4 rounded-4">
-            <h3 class="mb-4">Top Skills</h3>
-            <?php if (!empty($skills)): ?>
-              <?php 
-              $topSkills = array_slice($skills, 0, 10);
-              foreach ($topSkills as $skill): 
-              ?>
-              <div class="py-2">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h6 class="mb-0"><?php echo htmlspecialchars($skill['name']); ?></h6>
-                  <span class="badge bg-dark"><?php echo htmlspecialchars($skill['proficiency']); ?></span>
-                </div>
-              </div>
-              <?php endforeach; ?>
-            <?php endif; ?>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+			<!-- Skills Section -->
+			<?php if (!empty($skills)): ?>
+			<div class="row mt-5">
+				<div class="col-lg-12">
+					<h3 class="mb-4 text-center">Technical Skills</h3>
+					<div class="row">
+						<?php 
+						$skillsByCategory = [];
+						foreach ($skills as $skill) {
+							$category = $skill['category'] ?? 'Other';
+							if (!isset($skillsByCategory[$category])) {
+								$skillsByCategory[$category] = [];
+							}
+							$skillsByCategory[$category][] = $skill;
+						}
+						foreach ($skillsByCategory as $category => $categorySkills): 
+						?>
+						<div class="col-lg-3 col-md-6 mb-4">
+							<div class="card h-100">
+								<div class="card-header bg-primary text-white">
+									<h6 class="mb-0"><?php echo htmlspecialchars($category); ?></h6>
+								</div>
+								<div class="card-body">
+									<ul class="list-unstyled">
+										<?php foreach ($categorySkills as $skill): ?>
+										<li class="mb-2">
+											<strong><?php echo htmlspecialchars($skill['name']); ?></strong>
+											<span class="badge badge-secondary float-right"><?php echo htmlspecialchars($skill['proficiency']); ?></span>
+										</li>
+										<?php endforeach; ?>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
+			<?php endif; ?>
+		</div>
+	</section>
+	<!--================ End Experience/Education Area =================-->
 
-  <!-- Portfolio Section -->
-  <section id="portfolio" class="portfolio py-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 mb-5">
-          <div class="section-header text-center">
-            <h2 class="display-4 fw-bold mb-3">My Work</h2>
-            <p class="lead">As a passionate developer, I'm dedicated to creating exceptional digital experiences.</p>
-          </div>
-        </div>
-      </div>
+	<!--================ Start Features Area =================-->
+	<section class="features_area" id="services">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 text-center">
+					<div class="main_title">
+						<h2>Service Offers</h2>
+						<p>What I can do for you</p>
+					</div>
+				</div>
+			</div>
+			<div class="row feature_inner">
+				<?php if (!empty($services)): ?>
+					<?php foreach ($services as $service): ?>
+					<div class="col-lg-3 col-md-6 mb-4">
+						<div class="feature_item text-center">
+							<i class="fa fa-<?php echo htmlspecialchars($service['icon']); ?> fa-3x mb-3"></i>
+							<h4><?php echo htmlspecialchars($service['title']); ?></h4>
+							<p><?php echo htmlspecialchars($service['description']); ?></p>
+						</div>
+					</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</div>
+		</div>
+	</section>
+	<!--================ End Features Area =================-->
 
-      <div class="grid p-0 clearfix row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        <?php if (!empty($projects)): ?>
-          <?php foreach ($projects as $project): ?>
-          <div class="col portfolio-item">
-            <?php if (!empty($project['image'])): ?>
-            <a href="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" data-lightbox="portfolio" data-title="<?php echo htmlspecialchars($project['title']); ?>">
-              <img src="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" class="img-fluid rounded-4" alt="<?php echo htmlspecialchars($project['title']); ?>">
-            </a>
-            <?php endif; ?>
-            <div class="mt-3">
-              <h5><?php echo htmlspecialchars($project['title']); ?></h5>
-              <p class="postf small"><?php echo htmlspecialchars(substr($project['description'], 0, 80)); ?>...</p>
-              <?php if (!empty($project['project_link'])): ?>
-              <a href="<?php echo $project['project_link']; ?>" target="_blank" class="btn btn-sm btn-primary">View Project</a>
-              <?php endif; ?>
-            </div>
-          </div>
-          <?php endforeach; ?>
-        <?php endif; ?>
-      </div>
-    </div>
-  </section>
+	<!--================Start Portfolio Area =================-->
+	<section class="portfolio_area" id="portfolio">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="main_title text-left">
+						<h2>Quality Work <br>Recently Done Projects</h2>
+					</div>
+				</div>
+			</div>
+	
+			<div class="filters-content">
+				<div class="row portfolio-grid justify-content-center">
+					<?php if (!empty($projects)): ?>
+						<?php foreach ($projects as $project): ?>
+						<div class="col-lg-4 col-md-6 mb-4">
+							<div class="portfolio_box">
+								<div class="single_portfolio">
+									<?php if (!empty($project['image'])): ?>
+									<img class="img-fluid w-100" src="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" alt="<?php echo htmlspecialchars($project['title']); ?>">
+									<?php else: ?>
+									<img class="img-fluid w-100" src="<?php echo BASE_URL; ?>/public/assets/images/portfolio/p1.jpg" alt="">
+									<?php endif; ?>
+									<div class="overlay"></div>
+									<?php if (!empty($project['image'])): ?>
+									<a href="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" class="img-gal">
+										<div class="icon">
+											<span class="lnr lnr-cross"></span>
+										</div>
+									</a>
+									<?php endif; ?>
+								</div>
+								<div class="short_info">
+									<h4><?php echo htmlspecialchars($project['title']); ?></h4>
+									<p><?php echo htmlspecialchars(substr($project['description'], 0, 80)); ?>...</p>
+									<?php if (!empty($project['technologies'])): ?>
+									<p class="text-muted small">
+										<strong>Tech:</strong> <?php echo htmlspecialchars($project['technologies']); ?>
+									</p>
+									<?php endif; ?>
+									<?php if (!empty($project['project_link'])): ?>
+									<a href="<?php echo $project['project_link']; ?>" target="_blank" class="btn btn-sm btn-primary mt-2">View Project</a>
+									<?php endif; ?>
+								</div>
+							</div>
+						</div>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Portfolio Area =================-->
 
-  <!-- Testimonials Section -->
-  <?php if (!empty($testimonials)): ?>
-  <section id="testimonials">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="display-3">Testimonials</h2>
-      </div>
+	<!--================ Start Testimonial Area =================-->
+	<?php if (!empty($testimonials)): ?>
+	<div class="testimonial_area section_gap_bottom" id="testimonials">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 text-center">
+					<div class="main_title">
+						<h2>Client Testimonials</h2>
+						<p>What my clients say about my work</p>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="testi_slider owl-carousel">
+						<?php foreach ($testimonials as $testimonial): ?>
+						<div class="testi_item">
+							<div class="row">
+								<div class="col-lg-4">
+									<?php if (!empty($testimonial['client_photo'])): ?>
+									<img src="<?php echo BASE_URL; ?>/public/uploads/testimonials/<?php echo $testimonial['client_photo']; ?>" alt="<?php echo htmlspecialchars($testimonial['client_name']); ?>">
+									<?php else: ?>
+									<img src="<?php echo BASE_URL; ?>/public/assets/images/testimonials/t1.jpg" alt="">
+									<?php endif; ?>
+								</div>
+								<div class="col-lg-8">
+									<div class="testi_text">
+										<h4><?php echo htmlspecialchars($testimonial['client_name']); ?></h4>
+										<?php if (!empty($testimonial['company'])): ?>
+										<p class="text-muted"><?php echo htmlspecialchars($testimonial['company']); ?></p>
+										<?php endif; ?>
+										<p><?php echo htmlspecialchars($testimonial['content']); ?></p>
+										<div class="rating">
+											<?php for($i=0; $i<$testimonial['rating']; $i++): ?>
+											<i class="fa fa-star"></i>
+											<?php endfor; ?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
+	<!--================ End Testimonial Area =================-->
 
-      <div class="swiper testimonial-swiper">
-        <div class="swiper-wrapper">
-          <?php foreach ($testimonials as $testimonial): ?>
-          <div class="testimonial-card rounded-3 py-4 px-4 swiper-slide">
-            <div class="text-start">
-              <p class="mb-4">"<?php echo htmlspecialchars($testimonial['content']); ?>"</p>
-              <h5 class="mb-1"><?php echo htmlspecialchars($testimonial['client_name']); ?></h5>
-              <?php if (!empty($testimonial['company'])): ?>
-              <p class="postd mb-0"><?php echo htmlspecialchars($testimonial['company']); ?></p>
-              <?php endif; ?>
-              <div class="mt-2">
-                <?php for($i=0; $i<$testimonial['rating']; $i++): ?>
-                <i class="fas fa-star" style="color: var(--bs-primary);"></i>
-                <?php endfor; ?>
-              </div>
-            </div>
-          </div>
-          <?php endforeach; ?>
-        </div>
-        <div class="testimonial-swiper-pagination position-relative mt-5 text-center"></div>
-      </div>
-    </div>
-  </section>
-  <?php endif; ?>
+	<!--================ Start Contact Area =================-->
+	<section class="newsletter_area" id="contact">
+		<div class="container">
+			<div class="row justify-content-center align-items-center">
+				<div class="col-lg-10">
+					<div class="subscription_box text-center">
+						<h2 class="text-uppercase text-white">Get In Touch</h2>
+						<p class="text-white mb-4">
+							Feel free to contact me for any work or suggestions below
+						</p>
+						<form id="contactForm" class="subscription relative">
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<input type="text" name="name" class="form-control" placeholder="Your Name *" required>
+								</div>
+								<div class="col-md-6 mb-3">
+									<input type="email" name="email" class="form-control" placeholder="Your Email *" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 mb-3">
+									<input type="text" name="subject" class="form-control" placeholder="Subject">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 mb-3">
+									<textarea name="message" class="form-control" rows="4" placeholder="Your Message *" required></textarea>
+								</div>
+							</div>
+							<button type="submit" class="primary-btn hover d-inline">Send Message</button>
+							<div id="formMessage" class="mt-3"></div>
+						</form>
+						
+						<div class="contact_info mt-5 text-white">
+							<div class="row">
+								<div class="col-md-4">
+									<p><i class="fa fa-envelope"></i> <?php echo htmlspecialchars($profile['email'] ?? ''); ?></p>
+								</div>
+								<div class="col-md-4">
+									<p><i class="fa fa-phone"></i> <?php echo htmlspecialchars($profile['phone'] ?? ''); ?></p>
+								</div>
+								<div class="col-md-4">
+									<p><i class="fa fa-map-marker"></i> <?php echo htmlspecialchars($profile['address'] ?? ''); ?></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================ End Contact Area =================-->
 
-  <!-- Contact Section -->
-  <section id="contact" class="p-5 bg-yellow py-5">
-    <div class="container">
-      <div class="row justify-content-center my-5">
-        <div class="col-md-5">
-          <h6>Quick Contact</h6>
-          <h2 class="display-3">Leave a Message</h2>
-          <p>Feel free to reach out for collaborations or just a friendly hello!</p>
-          <div class="mt-4">
-            <p><i class="fas fa-envelope me-2"></i> <?php echo htmlspecialchars($profile['email'] ?? ''); ?></p>
-            <p><i class="fas fa-phone me-2"></i> <?php echo htmlspecialchars($profile['phone'] ?? ''); ?></p>
-            <p><i class="fas fa-map-marker-alt me-2"></i> <?php echo htmlspecialchars($profile['address'] ?? ''); ?></p>
-          </div>
-        </div>
-        <div class="col-md-5">
-          <form id="contactForm">
-            <div class="mb-3">
-              <input type="text" class="form-control p-3 rounded-4" name="name" placeholder="Your name *" required />
-            </div>
-            <div class="mb-3">
-              <input type="email" class="form-control p-3 rounded-4" name="email" placeholder="Your email *" required />
-            </div>
-            <div class="mb-3">
-              <input type="text" class="form-control p-3 rounded-4" name="subject" placeholder="Subject" />
-            </div>
-            <div class="mb-3">
-              <textarea class="form-control p-3 rounded-4" name="message" placeholder="Your message *" rows="3" required></textarea>
-            </div>
-            <div class="d-grid">
-              <button type="submit" class="btn btn-dark btn-lg text-uppercase rounded-4">Submit</button>
-            </div>
-            <div id="formMessage" class="form-message mt-3"></div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+	<!--================Footer Area =================-->
+	<footer class="footer_area">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-12">
+					<div class="footer_top flex-column">
+						<div class="footer_logo">
+							<h4><?php echo htmlspecialchars($profile['name'] ?? ''); ?></h4>
+							<h6>Follow Me</h6>
+						</div>
+						<div class="footer_social">
+							<?php if (!empty($profile['github'])): ?>
+							<a href="<?php echo $profile['github']; ?>" target="_blank"><i class="fa fa-github"></i></a>
+							<?php endif; ?>
+							<?php if (!empty($profile['linkedin'])): ?>
+							<a href="<?php echo $profile['linkedin']; ?>" target="_blank"><i class="fa fa-linkedin"></i></a>
+							<?php endif; ?>
+							<?php if (!empty($profile['twitter'])): ?>
+							<a href="<?php echo $profile['twitter']; ?>" target="_blank"><i class="fa fa-twitter"></i></a>
+							<?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row footer_bottom justify-content-center">
+				<p class="col-lg-8 col-sm-12 footer-text">
+					Copyright &copy;<script>document.write(new Date().getFullYear());</script> <?php echo htmlspecialchars($profile['name'] ?? ''); ?>. All rights reserved.
+				</p>
+			</div>
+		</div>
+	</footer>
+	<!--================End Footer Area =================-->
 
-  <!-- Footer -->
-  <footer id="footer" class="bg-black text-white py-5">
-    <div class="container-sm">
-      <div class="row g-md-5 my-5">
-        <div class="col-md-4">
-          <div class="info-box">
-            <h4 class="text-white mb-4"><?php echo htmlspecialchars($profile['name'] ?? ''); ?></h4>
-            <p class="py-4"><?php echo htmlspecialchars(substr($profile['bio'] ?? '', 0, 150)); ?>...</p>
-            <div class="social-links">
-              <?php if (!empty($profile['github'])): ?>
-              <a href="<?php echo $profile['github']; ?>" target="_blank" class="text-white me-3"><i class="fab fa-github fa-lg"></i></a>
-              <?php endif; ?>
-              <?php if (!empty($profile['linkedin'])): ?>
-              <a href="<?php echo $profile['linkedin']; ?>" target="_blank" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
-              <?php endif; ?>
-              <?php if (!empty($profile['twitter'])): ?>
-              <a href="<?php echo $profile['twitter']; ?>" target="_blank" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
-              <?php endif; ?>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <h6 class="text-white mb-3">Quick Links</h6>
-          <ul class="list-unstyled">
-            <li><a class="text-decoration-none text-white-50" href="#home">Home</a></li>
-            <li><a class="text-decoration-none text-white-50" href="#about">About</a></li>
-            <li><a class="text-decoration-none text-white-50" href="#services">Services</a></li>
-            <li><a class="text-decoration-none text-white-50" href="#portfolio">Portfolio</a></li>
-            <li><a class="text-decoration-none text-white-50" href="#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="col-md-5">
-          <h6 class="text-white mb-3">Get In Touch</h6>
-          <p>Feel free to contact if you wanna collaborate with me, or simply have a conversation.</p>
-          <h5>
-            <a href="mailto:<?php echo htmlspecialchars($profile['email'] ?? ''); ?>" class="text-white text-decoration-none">
-              <?php echo htmlspecialchars($profile['email'] ?? ''); ?>
-            </a>
-          </h5>
-        </div>
-      </div>
-      <div class="row">
-        <p class="text-center text-white-50">©<?php echo date('Y'); ?> <?php echo htmlspecialchars($profile['name'] ?? ''); ?>. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+	<!-- Optional JavaScript -->
+	<script src="<?php echo BASE_URL; ?>/public/assets/js/jquery-3.2.1.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/public/assets/js/popper.js"></script>
+	<script src="<?php echo BASE_URL; ?>/public/assets/js/bootstrap.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/public/assets/js/stellar.js"></script>
+	<script src="<?php echo BASE_URL; ?>/public/assets/js/jquery.magnific-popup.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/public/assets/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/public/assets/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/public/assets/vendors/isotope/isotope-min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/public/assets/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/public/assets/js/jquery.ajaxchimp.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/public/assets/js/theme.js"></script>
+	
+	<script>
+	// Smooth scroll for anchor links
+	$(document).ready(function(){
+		$('a[href^="#"]').on('click', function(e) {
+			e.preventDefault();
+			var target = $(this).attr('href');
+			if(target !== '#') {
+				$('html, body').animate({
+					scrollTop: $(target).offset().top - 70
+				}, 800);
+			}
+		});
 
-  <!-- Bootstrap JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+		// Active menu on scroll
+		$(window).on('scroll', function() {
+			var scrollPos = $(window).scrollTop() + 100;
+			$('section[id]').each(function() {
+				var sectionTop = $(this).offset().top;
+				var sectionHeight = $(this).outerHeight();
+				var sectionId = $(this).attr('id');
+				
+				if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+					$('.menu_nav .nav-link').removeClass('active');
+					$('.menu_nav .nav-link[href="#' + sectionId + '"]').addClass('active');
+				}
+			});
+		});
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-
-  <!-- Lightbox JS -->
-  <script src="<?php echo BASE_URL; ?>/public/assets/js/lightbox.min.js"></script>
-
-  <!-- Custom JS -->
-  <script src="<?php echo BASE_URL; ?>/public/assets/js/script.js"></script>
+		// Contact Form Handler
+		$('#contactForm').on('submit', function(e) {
+			e.preventDefault();
+			
+			var form = $(this);
+			var formData = new FormData(this);
+			var submitBtn = form.find('button[type="submit"]');
+			var btnText = submitBtn.html();
+			var formMessage = $('#formMessage');
+			
+			submitBtn.prop('disabled', true).html('Sending...');
+			formMessage.removeClass('alert-success alert-danger').hide();
+			
+			$.ajax({
+				url: '/contact',
+				type: 'POST',
+				data: formData,
+				processData: false,
+				contentType: false,
+				dataType: 'json',
+				success: function(response) {
+					if (response.success) {
+						formMessage.addClass('alert alert-success text-white')
+							.html('<i class="fa fa-check-circle"></i> ' + (response.message || 'Message sent successfully!'))
+							.fadeIn();
+						form[0].reset();
+					} else {
+						formMessage.addClass('alert alert-danger text-white')
+							.html('<i class="fa fa-exclamation-circle"></i> ' + (response.message || 'Failed to send message.'))
+							.fadeIn();
+					}
+				},
+				error: function() {
+					formMessage.addClass('alert alert-danger text-white')
+						.html('<i class="fa fa-exclamation-circle"></i> An error occurred. Please try again.')
+						.fadeIn();
+				},
+				complete: function() {
+					submitBtn.prop('disabled', false).html(btnText);
+					setTimeout(function() {
+						formMessage.fadeOut();
+					}, 5000);
+				}
+			});
+		});
+	});
+	</script>
 </body>
 </html>
