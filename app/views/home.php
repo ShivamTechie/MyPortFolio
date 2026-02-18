@@ -38,13 +38,23 @@
 						<span class="icon-bar"></span>
 					</button>
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav justify-content-end">
+						<ul class="nav navbar-nav menu_nav justify-content-end align-items-center">
 							<li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
 							<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
 							<li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
 							<li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
 							<li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
 							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+							<?php if (!empty($profile['resume_path'])): ?>
+							<li class="nav-item">
+								<a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" 
+								   class="nav-link resume-download-btn" 
+								   download 
+								   title="Download Resume">
+									<i class="fa fa-download"></i> Resume
+								</a>
+							</li>
+							<?php endif; ?>
 						</ul>
 					</div>
 				</div>
@@ -110,7 +120,9 @@
 							<p><strong>Location:</strong> <?php echo htmlspecialchars($profile['address'] ?? ''); ?></p>
 						</div>
 						<?php if (!empty($profile['resume_path'])): ?>
-						<a class="primary_btn" href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" target="_blank"><span>Download CV</span></a>
+						<a class="primary_btn" href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" download>
+							<span><i class="fa fa-download"></i> Download Resume</span>
+						</a>
 						<?php endif; ?>
 					</div>
 				</div>
@@ -380,6 +392,17 @@
 		</div>
 	</section>
 	<!--================ End Contact Area =================-->
+
+	<!-- Floating Resume Download Button -->
+	<?php if (!empty($profile['resume_path'])): ?>
+	<a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" 
+	   class="floating-resume-btn" 
+	   download 
+	   title="Download My Resume">
+		<i class="fa fa-download"></i>
+		<span>Resume</span>
+	</a>
+	<?php endif; ?>
 
 	<!--================Footer Area =================-->
 	<footer class="footer_area">

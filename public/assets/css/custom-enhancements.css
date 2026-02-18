@@ -597,6 +597,30 @@ html {
         left: 50%;
         transform: translateX(-50%);
     }
+    
+    /* Mobile Resume Button */
+    .resume-download-btn {
+        margin-left: 0 !important;
+        margin-top: 10px !important;
+        display: block !important;
+        text-align: center !important;
+    }
+    
+    .floating-resume-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .floating-resume-btn span {
+        display: none;
+    }
+    
+    .floating-resume-btn i {
+        font-size: 20px;
+        margin: 0;
+    }
 }
 
 /* ===================================
@@ -616,6 +640,89 @@ html {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ===================================
+   Resume Download Buttons
+   =================================== */
+
+/* Navigation Resume Button */
+.resume-download-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: #fff !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    margin-left: 15px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.resume-download-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5) !important;
+}
+
+.resume-download-btn i {
+    margin-right: 5px;
+}
+
+/* Floating Resume Button */
+.floating-resume-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.floating-resume-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+    color: #fff;
+    text-decoration: none;
+}
+
+.floating-resume-btn i {
+    font-size: 18px;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 35px rgba(102, 126, 234, 0.7);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+/* About Section Resume Button Enhancement */
+.about_area .primary_btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 /* ===================================
