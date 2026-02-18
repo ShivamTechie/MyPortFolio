@@ -341,6 +341,129 @@ html {
    Portfolio / Projects Grid
    =================================== */
 
+.portfolio_area {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.portfolio_box {
+    margin-bottom: 30px;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.portfolio_box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.single_portfolio {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+}
+
+.single_portfolio img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.single_portfolio:hover img {
+    transform: scale(1.1);
+}
+
+.single_portfolio .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.85) 0%, rgba(118, 75, 162, 0.85) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.single_portfolio:hover .overlay {
+    opacity: 1;
+}
+
+.single_portfolio .img-gal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease 0.1s;
+    z-index: 2;
+}
+
+.single_portfolio:hover .img-gal {
+    opacity: 1;
+}
+
+.single_portfolio .icon {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.single_portfolio .icon:hover {
+    transform: rotate(90deg);
+    background: #f8f9fa;
+}
+
+.single_portfolio .icon span {
+    font-size: 24px;
+    color: #667eea;
+}
+
+.portfolio_box .short_info {
+    padding: 25px;
+}
+
+.portfolio_box .short_info h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #2c3e50;
+}
+
+.portfolio_box .short_info p {
+    font-size: 14px;
+    color: #7f8c8d;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.portfolio_box .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.portfolio_box .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
 .portfolio-item {
     position: relative;
     overflow: hidden;
@@ -426,6 +549,18 @@ html {
     
     .contact_info i {
         font-size: 16px;
+    }
+    
+    .single_portfolio {
+        height: 220px;
+    }
+    
+    .portfolio_box .short_info {
+        padding: 20px 15px;
+    }
+    
+    .portfolio_box .short_info h4 {
+        font-size: 18px;
     }
 }
 

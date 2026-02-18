@@ -430,6 +430,16 @@
 	<script>
 	// Smooth scroll for anchor links
 	$(document).ready(function(){
+		// Initialize Magnific Popup for portfolio images
+		$('.img-gal').magnificPopup({
+			type: 'image',
+			gallery: {
+				enabled: true
+			},
+			removalDelay: 300,
+			mainClass: 'mfp-fade'
+		});
+		
 		$('a[href^="#"]').on('click', function(e) {
 			e.preventDefault();
 			var target = $(this).attr('href');
