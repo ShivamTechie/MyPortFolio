@@ -35,8 +35,16 @@ class ProfileController {
      * Update Profile
      */
     public function update() {
+        $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+                  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+        
         // Verify CSRF token
         if (!isset($_POST['csrf_token']) || !Session::verifyCsrfToken($_POST['csrf_token'])) {
+            if ($isAjax) {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Invalid request. Please refresh and try again.']);
+                exit;
+            }
             Session::flash('error', 'Invalid request.', 'error');
             header('Location: ' . ADMIN_URL . '?page=profile');
             exit;
@@ -54,6 +62,18 @@ class ProfileController {
             'twitter' => $_POST['twitter'] ?? ''
         ];
 
+        // Validate required fields
+        if (empty($data['name']) || empty($data['title']) || empty($data['email'])) {
+            if ($isAjax) {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Please fill in all required fields.']);
+                exit;
+            }
+            Session::flash('error', 'Please fill in all required fields.', 'error');
+            header('Location: ' . ADMIN_URL . '?page=profile');
+            exit;
+        }
+
         // Handle profile image upload
         if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
             require_once APP_PATH . '/core/Upload.php';
@@ -62,6 +82,12 @@ class ProfileController {
             
             if ($imageName) {
                 $data['profile_image'] = $imageName;
+            } else {
+                if ($isAjax) {
+                    header('Content-Type: application/json');
+                    echo json_encode(['success' => false, 'message' => 'Failed to upload profile image.']);
+                    exit;
+                }
             }
         }
 
@@ -73,12 +99,32 @@ class ProfileController {
             
             if ($resumeName) {
                 $data['resume_path'] = $resumeName;
+            } else {
+                if ($isAjax) {
+                    header('Content-Type: application/json');
+                    echo json_encode(['success' => false, 'message' => 'Failed to upload resume.']);
+                    exit;
+                }
             }
         }
 
         if ($this->profileModel->updateProfile($data)) {
+            if ($isAjax) {
+                header('Content-Type: application/json');
+                echo json_encode([
+                    'success' => true, 
+                    'message' => 'Profile updated successfully! ✓',
+                    'reload' => true
+                ]);
+                exit;
+            }
             Session::flash('success', 'Profile updated successfully!', 'success');
         } else {
+            if ($isAjax) {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Failed to update profile. Please try again.']);
+                exit;
+            }
             Session::flash('error', 'Failed to update profile.', 'error');
         }
 

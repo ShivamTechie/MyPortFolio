@@ -1,11 +1,12 @@
 <?php
 /**
- * Experience Controller
+ * Experience Controller with AJAX Support
  */
 
+require_once ADMIN_PATH . '/controllers/BaseController.php';
 require_once APP_PATH . '/models/Experience.php';
 
-class ExperienceController {
+class ExperienceController extends BaseController {
     private $model;
 
     public function __construct() {
@@ -37,20 +38,19 @@ class ExperienceController {
 
     public function add() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = [
-                'company' => $_POST['company'] ?? '',
-                'position' => $_POST['position'] ?? '',
-                'start_date' => $_POST['start_date'] ?? '',
-                'end_date' => $_POST['end_date'] ?? null,
-                'is_current' => isset($_POST['is_current']) ? 1 : 0,
-                'description' => $_POST['description'] ?? '',
-                'display_order' => $_POST['display_order'] ?? 0
-            ];
+            $this->validateCsrf();
+            
+            $data = $this->getInput(['company', 'position', 'start_date', 'end_date', 'description', 'display_order']);
+            $data['is_current'] = isset($_POST['is_current']) ? 1 : 0;
+
+            if (!$this->validateRequired(['company', 'position', 'start_date'], $data)) {
+                $this->handleResponse(false, 'Please fill in all required fields.', ADMIN_URL . '?page=experience&action=add');
+            }
 
             if ($this->model->insert($data)) {
-                Session::flash('success', 'Experience added successfully!', 'success');
-                header('Location: ' . ADMIN_URL . '?page=experience');
-                exit;
+                $this->handleResponse(true, 'Experience added successfully! ✓', ADMIN_URL . '?page=experience');
+            } else {
+                $this->handleResponse(false, 'Failed to add experience. Please try again.', ADMIN_URL . '?page=experience&action=add');
             }
         }
 
@@ -65,26 +65,23 @@ class ExperienceController {
         $item = $this->model->getById($id);
 
         if (!$item) {
-            Session::flash('error', 'Experience not found.', 'error');
-            header('Location: ' . ADMIN_URL . '?page=experience');
-            exit;
+            $this->handleResponse(false, 'Experience not found.', ADMIN_URL . '?page=experience');
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = [
-                'company' => $_POST['company'] ?? '',
-                'position' => $_POST['position'] ?? '',
-                'start_date' => $_POST['start_date'] ?? '',
-                'end_date' => $_POST['end_date'] ?? null,
-                'is_current' => isset($_POST['is_current']) ? 1 : 0,
-                'description' => $_POST['description'] ?? '',
-                'display_order' => $_POST['display_order'] ?? 0
-            ];
+            $this->validateCsrf();
+            
+            $data = $this->getInput(['company', 'position', 'start_date', 'end_date', 'description', 'display_order']);
+            $data['is_current'] = isset($_POST['is_current']) ? 1 : 0;
+
+            if (!$this->validateRequired(['company', 'position', 'start_date'], $data)) {
+                $this->handleResponse(false, 'Please fill in all required fields.', ADMIN_URL . '?page=experience&action=edit&id=' . $id);
+            }
 
             if ($this->model->update($id, $data)) {
-                Session::flash('success', 'Experience updated successfully!', 'success');
-                header('Location: ' . ADMIN_URL . '?page=experience');
-                exit;
+                $this->handleResponse(true, 'Experience updated successfully! ✓', ADMIN_URL . '?page=experience');
+            } else {
+                $this->handleResponse(false, 'Failed to update experience. Please try again.', ADMIN_URL . '?page=experience&action=edit&id=' . $id);
             }
         }
 
@@ -96,8 +93,17 @@ class ExperienceController {
 
     public function delete() {
         $id = $_GET['id'] ?? 0;
+        
         if ($this->model->delete($id)) {
+            if ($this->isAjax()) {
+                $this->jsonResponse(true, 'Experience deleted successfully! ✓');
+            }
             Session::flash('success', 'Experience deleted successfully!', 'success');
+        } else {
+            if ($this->isAjax()) {
+                $this->jsonResponse(false, 'Failed to delete experience. Please try again.');
+            }
+            Session::flash('error', 'Failed to delete experience.', 'error');
         }
         header('Location: ' . ADMIN_URL . '?page=experience');
         exit;
