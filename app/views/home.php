@@ -85,6 +85,9 @@
                     <a href="#about" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">About</a>
                     <a href="#skills" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Skills</a>
                     <a href="#experience" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Experience</a>
+                    <?php if (!empty($services)): ?>
+                    <a href="#services" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Services</a>
+                    <?php endif; ?>
                     <a href="#projects" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Projects</a>
                     <?php if (!empty($testimonials)): ?>
                     <a href="#testimonials" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Testimonials</a>
@@ -113,6 +116,9 @@
                 <a href="#about" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">About</a>
                 <a href="#skills" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Skills</a>
                 <a href="#experience" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Experience</a>
+                <?php if (!empty($services)): ?>
+                <a href="#services" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Services</a>
+                <?php endif; ?>
                 <a href="#projects" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Projects</a>
                 <?php if (!empty($testimonials)): ?>
                 <a href="#testimonials" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Testimonials</a>
@@ -369,6 +375,37 @@
             </div>
         </div>
     </section>
+
+    <!-- Services Section -->
+    <?php if (!empty($services)): ?>
+    <section id="services" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">My Services</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">What I can do for you</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <?php 
+                $iconClasses = ['fa-code', 'fa-wordpress', 'fa-paint-brush', 'fa-chart-line', 'fa-mobile-alt', 'fa-cogs'];
+                $iconIndex = 0;
+                foreach ($services as $service): 
+                ?>
+                <div class="bg-gradient-to-br from-gray-50 to-blue-50 p-8 rounded-xl card-hover">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6 text-white text-2xl">
+                        <i class="fas <?php echo !empty($service['icon']) ? htmlspecialchars($service['icon']) : $iconClasses[$iconIndex % count($iconClasses)]; ?>"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3"><?php echo htmlspecialchars($service['title']); ?></h3>
+                    <p class="text-gray-600 leading-relaxed"><?php echo htmlspecialchars($service['description']); ?></p>
+                </div>
+                <?php 
+                    $iconIndex++;
+                endforeach; 
+                ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
 
     <!-- Projects Section -->
     <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
