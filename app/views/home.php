@@ -1,646 +1,682 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="utf-8">
-    <title><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?> - <?php echo htmlspecialchars($profile['title'] ?? 'Professional Portfolio'); ?></title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="<?php echo htmlspecialchars($profile['bio'] ?? ''); ?>" name="description">
-    <meta content="<?php echo htmlspecialchars($profile['title'] ?? ''); ?>" name="keywords">
-
-    <!-- Favicon -->
-    <link href="<?php echo BASE_URL; ?>/public/assets/images/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"> 
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="<?php echo BASE_URL; ?>/public/assets/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>/public/assets/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>/public/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="<?php echo BASE_URL; ?>/public/assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="<?php echo BASE_URL; ?>/public/assets/css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?> - <?php echo htmlspecialchars($profile['title'] ?? 'Developer'); ?></title>
+    <meta name="description" content="<?php echo htmlspecialchars($profile['bio'] ?? ''); ?>">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Custom Navigation Styles */
-        .navbar {
-            padding: 15px 0;
-            transition: all 0.3s ease;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
         }
         
-        .navbar-brand h3 {
-            font-size: 1.8rem;
-            margin: 0;
+        .gradient-text {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .navbar .nav-link {
-            font-weight: 500;
-            color: #495057 !important;
-            padding: 8px 16px !important;
-            margin: 0 2px;
-            border-radius: 5px;
+        .card-hover {
             transition: all 0.3s ease;
         }
         
-        .navbar .nav-link:hover,
-        .navbar .nav-link.active {
-            color: #667eea !important;
-            background: rgba(102, 126, 234, 0.1);
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
-        .navbar .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
         
-        .navbar .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .navbar-toggler {
-            border: none;
-            padding: 5px 10px;
-        }
-        
-        .navbar-toggler:focus {
-            box-shadow: none;
-        }
-        
-        /* Adjust header spacing */
-        .container-fluid.bg-light.my-6 {
-            margin-top: 80px !important;
-        }
-        
-        @media (max-width: 991px) {
-            .navbar .btn-primary {
-                margin-top: 10px;
-                width: 100%;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            
-            .navbar .nav-link {
-                padding: 10px 15px !important;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
         }
     </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
+<body class="bg-white text-gray-900">
 
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light fixed-top shadow-sm">
-        <div class="container">
-            <a href="#home" class="navbar-brand">
-                <h3 class="text-primary fw-bold m-0"><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?></h3>
-            </a>
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto">
-                    <a href="#home" class="nav-item nav-link active">Home</a>
-                    <a href="#about" class="nav-item nav-link">About</a>
-                    <a href="#skill" class="nav-item nav-link">Skills</a>
-                    <a href="#service" class="nav-item nav-link">Services</a>
-                    <a href="#project" class="nav-item nav-link">Projects</a>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#home" class="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
+                    <?php echo htmlspecialchars(explode(' ', $profile['name'] ?? 'Portfolio')[0]); ?><span class="text-blue-600">.</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#home" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Home</a>
+                    <a href="#about" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">About</a>
+                    <a href="#skills" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Skills</a>
+                    <a href="#experience" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Experience</a>
+                    <a href="#projects" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Projects</a>
                     <?php if (!empty($testimonials)): ?>
-                    <a href="#testimonial" class="nav-item nav-link">Testimonial</a>
+                    <a href="#testimonials" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Testimonials</a>
                     <?php endif; ?>
-                    <a href="#contact" class="nav-item nav-link">Contact</a>
-                    <?php if (!empty($profile['resume_path'])): ?>
-                    <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" 
-                       class="btn btn-primary ms-3 px-4 py-2" download>
-                        <i class="fas fa-download me-2"></i>Download CV
-                    </a>
-                    <?php endif; ?>
+                    <a href="#contact" class="nav-link px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50">Contact</a>
                 </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-all duration-300">
+                        Let's Talk
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#home" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Home</a>
+                <a href="#about" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">About</a>
+                <a href="#skills" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Skills</a>
+                <a href="#experience" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Experience</a>
+                <a href="#projects" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Projects</a>
+                <?php if (!empty($testimonials)): ?>
+                <a href="#testimonials" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Testimonials</a>
+                <?php endif; ?>
+                <a href="#contact" class="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors">Contact</a>
+                <a href="#contact" class="block w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium text-center mt-4">Let's Talk</a>
             </div>
         </div>
     </nav>
-    <!-- Navbar End -->
 
-    <!-- Header Start -->
-    <div class="container-fluid bg-light my-6 mt-0" id="home">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6 py-6 pb-0 pt-lg-0">
-                    <h3 class="text-primary mb-3">I'm</h3>
-                    <h1 class="display-3 mb-3"><?php echo htmlspecialchars($profile['name'] ?? ''); ?></h1>
-                    <h2 class="typed-text-output d-inline"></h2>
-                    <div class="typed-text d-none"><?php echo htmlspecialchars($profile['title'] ?? 'Web Designer, Web Developer, Full Stack Developer'); ?></div>
-                    <div class="d-flex align-items-center pt-5">
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 via-white to-blue-50">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-8 fade-in-up">
+                    <div class="space-y-4">
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
+                            Hi, I'm 
+                            <span class="gradient-text block mt-2"><?php echo htmlspecialchars($profile['name'] ?? ''); ?></span>
+                        </h1>
+                        <p class="text-xl sm:text-2xl text-gray-600 font-medium">
+                            <?php echo htmlspecialchars($profile['title'] ?? ''); ?>
+                        </p>
+                        <p class="text-lg text-gray-500 leading-relaxed">
+                            Crafting Digital Experiences with Code
+                        </p>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-base font-medium transition-all duration-300 hover:shadow-lg">
+                            Hire Me
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
                         <?php if (!empty($profile['resume_path'])): ?>
-                        <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" class="btn btn-primary py-3 px-4 me-5" download>Download CV</a>
+                        <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" download class="inline-flex items-center border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 rounded-lg text-base font-medium transition-all duration-300">
+                            <i class="fas fa-download mr-2"></i>
+                            Download CV
+                        </a>
                         <?php endif; ?>
-                        <a href="#contact" class="btn btn-outline-primary py-3 px-4">Hire Me</a>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <?php if (!empty($profile['profile_image'])): ?>
-                    <img class="img-fluid" src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_image']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>">
-                    <?php else: ?>
-                    <img class="img-fluid" src="<?php echo BASE_URL; ?>/public/assets/images/shivam.jpg" alt="">
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Header End -->
 
-    <!-- About Start -->
-    <div class="container-xxl py-6" id="about">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <?php 
-                    $yearsExperience = 0;
-                    if (!empty($experience)) {
-                        foreach ($experience as $exp) {
-                            $start = new DateTime($exp['start_date']);
-                            $end = $exp['end_date'] ? new DateTime($exp['end_date']) : new DateTime();
-                            $diff = $start->diff($end);
-                            $yearsExperience += $diff->y + ($diff->m / 12);
-                        }
-                        $yearsExperience = round($yearsExperience);
-                    }
-                    ?>
-                    <div class="d-flex align-items-center mb-5">
-                        <div class="years flex-shrink-0 text-center me-4">
-                            <h1 class="display-1 mb-0"><?php echo $yearsExperience > 0 ? $yearsExperience : '2+'; ?></h1>
-                            <h5 class="mb-0">Years</h5>
-                        </div>
-                        <h3 class="lh-base mb-0">of working experience as a <?php echo htmlspecialchars($profile['title'] ?? 'web designer & developer'); ?></h3>
-                    </div>
-                    <p class="mb-4"><?php echo nl2br(htmlspecialchars($profile['bio'] ?? '')); ?></p>
-                    <div class="row mb-4">
-                        <div class="col-sm-6 py-2">
-                            <h6 class="mb-0">Name:</h6>
-                            <span><?php echo htmlspecialchars($profile['name'] ?? ''); ?></span>
-                        </div>
-                        <div class="col-sm-6 py-2">
-                            <h6 class="mb-0">Email:</h6>
-                            <span><?php echo htmlspecialchars($profile['email'] ?? ''); ?></span>
-                        </div>
-                        <div class="col-sm-6 py-2">
-                            <h6 class="mb-0">Phone:</h6>
-                            <span><?php echo htmlspecialchars($profile['phone'] ?? ''); ?></span>
-                        </div>
-                        <div class="col-sm-6 py-2">
-                            <h6 class="mb-0">Location:</h6>
-                            <span><?php echo htmlspecialchars($profile['address'] ?? ''); ?></span>
+                    <!-- Social Links -->
+                    <div class="flex items-center gap-4 pt-4">
+                        <span class="text-gray-600 font-medium">Follow me:</span>
+                        <div class="flex gap-3">
+                            <?php if (!empty($profile['github'])): ?>
+                            <a href="<?php echo $profile['github']; ?>" target="_blank" class="p-3 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <?php endif; ?>
+                            <?php if (!empty($profile['linkedin'])): ?>
+                            <a href="<?php echo $profile['linkedin']; ?>" target="_blank" class="p-3 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <?php endif; ?>
+                            <?php if (!empty($profile['twitter'])): ?>
+                            <a href="<?php echo $profile['twitter']; ?>" target="_blank" class="p-3 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <?php endif; ?>
                         </div>
                     </div>
-                    <?php if (!empty($profile['resume_path'])): ?>
-                    <a class="btn btn-primary py-3 px-5 mt-3" href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" download>Download CV</a>
-                    <?php endif; ?>
                 </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <?php if (!empty($profile['profile_image'])): ?>
-                    <div class="row g-3 mb-4">
-                        <div class="col-sm-12">
-                            <img class="img-fluid rounded" src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_image']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>">
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                    <div class="d-flex align-items-center mb-3">
-                        <h5 class="border-end pe-3 me-3 mb-0">Happy Clients</h5>
-                        <h2 class="text-primary fw-bold mb-0" data-toggle="counter-up"><?php echo !empty($testimonials) ? count($testimonials) * 10 : 50; ?></h2>
-                    </div>
-                    <p class="mb-4">Delivering quality solutions that exceed expectations.</p>
-                    <div class="d-flex align-items-center mb-3">
-                        <h5 class="border-end pe-3 me-3 mb-0">Projects Completed</h5>
-                        <h2 class="text-primary fw-bold mb-0" data-toggle="counter-up"><?php echo !empty($projects) ? count($projects) : 10; ?></h2>
-                    </div>
-                    <p class="mb-0">Successfully delivered projects using modern technologies and best practices.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About End -->
 
-    <!-- Expertise Start -->
-    <div class="container-xxl py-6 pb-5" id="skill">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="display-5 mb-5">Skills & Experience</h1>
-                    <p class="mb-4"><?php echo htmlspecialchars(substr($profile['bio'] ?? '', 0, 200)); ?>...</p>
-                    <h3 class="mb-4">My Skills</h3>
-                    <div class="row align-items-center">
-                        <?php 
-                        $colors = ['primary', 'warning', 'danger', 'success', 'info', 'dark'];
-                        $colorIndex = 0;
-                        $skillCount = 0;
-                        if (!empty($skills)): 
-                            foreach ($skills as $category => $categorySkills):
-                                foreach ($categorySkills as $skill):
-                                    if ($skillCount < 8): // Limit to 8 skills for display
-                                        $proficiency = isset($skill['proficiency']) ? intval($skill['proficiency']) : 90;
-                                        $color = $colors[$colorIndex % count($colors)];
-                                        $colorIndex++;
-                        ?>
-                        <div class="col-md-6">
-                            <div class="skill mb-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="font-weight-bold"><?php echo htmlspecialchars($skill['name']); ?></h6>
-                                    <h6 class="font-weight-bold"><?php echo $proficiency; ?>%</h6>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-<?php echo $color; ?>" role="progressbar" aria-valuenow="<?php echo $proficiency; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $proficiency; ?>%"></div>
+                <!-- Right Content - Image -->
+                <div class="relative fade-in-up" style="animation-delay: 0.2s">
+                    <div class="relative z-10">
+                        <div class="w-full max-w-lg mx-auto">
+                            <div class="relative">
+                                <!-- Decorative Elements -->
+                                <div class="absolute -top-6 -left-6 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse-slow"></div>
+                                <div class="absolute -bottom-6 -right-6 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse-slow" style="animation-delay: 2s"></div>
+                                
+                                <!-- Main Image -->
+                                <div class="relative bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-1">
+                                    <?php if (!empty($profile['profile_image'])): ?>
+                                    <img src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_image']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>" class="w-full h-auto rounded-2xl object-cover shadow-2xl">
+                                    <?php else: ?>
+                                    <img src="<?php echo BASE_URL; ?>/public/assets/images/profile.png" alt="Profile" class="w-full h-auto rounded-2xl object-cover shadow-2xl">
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
-                        <?php 
-                                        $skillCount++;
-                                    endif;
-                                endforeach;
-                            endforeach;
-                        endif;
-                        ?>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <ul class="nav nav-pills rounded border border-2 border-primary mb-5">
-                        <li class="nav-item w-50">
-                            <button class="nav-link w-100 py-3 fs-5 active" data-bs-toggle="pill" href="#tab-1">Experience</button>
-                        </li>
-                        <li class="nav-item w-50">
-                            <button class="nav-link w-100 py-3 fs-5" data-bs-toggle="pill" href="#tab-2">Education</button>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab-1" class="tab-pane fade show p-0 active">
-                            <div class="row gy-5 gx-4">
-                                <?php if (!empty($experience)): ?>
-                                    <?php foreach (array_slice($experience, 0, 4) as $exp): ?>
-                                    <div class="col-sm-6">
-                                        <h5><?php echo htmlspecialchars($exp['position']); ?></h5>
-                                        <hr class="text-primary my-2">
-                                        <p class="text-primary mb-1">
-                                            <?php 
-                                            echo date('Y', strtotime($exp['start_date'])); 
-                                            echo ' - ';
-                                            echo $exp['end_date'] ? date('Y', strtotime($exp['end_date'])) : 'Present';
-                                            ?>
-                                        </p>
-                                        <h6 class="mb-0"><?php echo htmlspecialchars($exp['company']); ?></h6>
-                                    </div>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <div class="col-12">
-                                        <p>Add your work experience from the admin panel.</p>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <div id="tab-2" class="tab-pane fade show p-0">
-                            <div class="row gy-5 gx-4">
-                                <?php if (!empty($education)): ?>
-                                    <?php foreach (array_slice($education, 0, 4) as $edu): ?>
-                                    <div class="col-sm-6">
-                                        <h5><?php echo htmlspecialchars($edu['degree']); ?></h5>
-                                        <hr class="text-primary my-2">
-                                        <p class="text-primary mb-1">
-                                            <?php 
-                                            echo date('Y', strtotime($edu['start_date'])); 
-                                            echo ' - ';
-                                            echo $edu['end_date'] ? date('Y', strtotime($edu['end_date'])) : 'Present';
-                                            ?>
-                                        </p>
-                                        <h6 class="mb-0"><?php echo htmlspecialchars($edu['institution']); ?></h6>
-                                        <?php if (!empty($edu['cgpa'])): ?>
-                                        <small class="text-muted">CGPA: <?php echo htmlspecialchars($edu['cgpa']); ?></small>
-                                        <?php endif; ?>
-                                    </div>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <div class="col-12">
-                                        <p>Add your education details from the admin panel.</p>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Expertise End -->
+    </section>
 
-    <!-- Service Start -->
-    <div class="container-fluid bg-light my-5 py-6" id="service">
-        <div class="container">
-            <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-lg-6">
-                    <h1 class="display-5 mb-0">My Services</h1>
-                </div>
-                <div class="col-lg-6 text-lg-end">
-                    <a class="btn btn-primary py-3 px-5" href="#contact">Hire Me</a>
-                </div>
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">About Me</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Get to know more about my background and expertise</p>
             </div>
-            <div class="row g-4">
-                <?php if (!empty($services)): ?>
-                    <?php 
-                    $delays = ['0.1s', '0.3s', '0.5s', '0.7s'];
-                    $iconClasses = ['fa-crop-alt', 'fa-code-branch', 'fa-code', 'fa-laptop-code', 'fa-paint-brush', 'fa-cogs'];
-                    $iconIndex = 0;
-                    foreach ($services as $index => $service): 
-                    ?>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="<?php echo $delays[$index % 4]; ?>">
-                        <div class="service-item d-flex flex-column flex-sm-row bg-white rounded h-100 p-4 p-lg-5">
-                            <div class="bg-icon flex-shrink-0 mb-3">
-                                <i class="fa <?php echo !empty($service['icon']) ? htmlspecialchars($service['icon']) : $iconClasses[$iconIndex % count($iconClasses)]; ?> fa-2x text-dark"></i>
-                            </div>
-                            <div class="ms-sm-4">
-                                <h4 class="mb-3"><?php echo htmlspecialchars($service['title']); ?></h4>
-                                <span><?php echo htmlspecialchars($service['description']); ?></span>
-                            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        <?php echo nl2br(htmlspecialchars($profile['bio'] ?? '')); ?>
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div>
+                            <p class="text-sm text-gray-500 mb-1">Email</p>
+                            <p class="font-medium text-gray-900"><?php echo htmlspecialchars($profile['email'] ?? ''); ?></p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 mb-1">Phone</p>
+                            <p class="font-medium text-gray-900"><?php echo htmlspecialchars($profile['phone'] ?? ''); ?></p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 mb-1">Location</p>
+                            <p class="font-medium text-gray-900"><?php echo htmlspecialchars($profile['address'] ?? ''); ?></p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 mb-1">Experience</p>
+                            <p class="font-medium text-gray-900">2+ Years</p>
                         </div>
                     </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6">
                     <?php 
-                        $iconIndex++;
-                    endforeach; 
-                    ?>
-                <?php else: ?>
-                    <div class="col-12 text-center">
-                        <p>Add your services from the admin panel.</p>
+                    $stats = [
+                        ['label' => 'Years Experience', 'value' => '2+', 'icon' => 'fa-calendar-alt'],
+                        ['label' => 'Happy Clients', 'value' => count($testimonials ?? []) * 10 ?: '50+', 'icon' => 'fa-users'],
+                        ['label' => 'Projects Done', 'value' => count($projects ?? []) ?: '10+', 'icon' => 'fa-project-diagram'],
+                        ['label' => 'Technologies', 'value' => '10+', 'icon' => 'fa-code']
+                    ];
+                    foreach ($stats as $stat): ?>
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl text-center card-hover">
+                        <div class="text-blue-600 mb-3">
+                            <i class="fas <?php echo $stat['icon']; ?> text-3xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-900 mb-1"><?php echo $stat['value']; ?></div>
+                        <div class="text-sm text-gray-600"><?php echo $stat['label']; ?></div>
                     </div>
-                <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Service End -->
+    </section>
 
-    <!-- Projects Start -->
-    <div class="container-xxl py-6 pt-5" id="project">
-        <div class="container">
-            <div class="row g-5 mb-5 align-items-center wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-lg-6">
-                    <h1 class="display-5 mb-0">My Projects</h1>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Technologies and tools I work with</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <?php 
+                if (!empty($skills)):
+                    $colors = ['blue', 'green', 'purple', 'pink', 'indigo', 'red'];
+                    $colorIndex = 0;
+                    foreach ($skills as $category => $categorySkills):
+                        foreach ($categorySkills as $skill):
+                            $color = $colors[$colorIndex % count($colors)];
+                            $proficiency = isset($skill['proficiency']) ? intval($skill['proficiency']) : 90;
+                ?>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-gray-900"><?php echo htmlspecialchars($skill['name']); ?></h3>
+                        <span class="text-sm font-medium text-<?php echo $color; ?>-600"><?php echo $proficiency; ?>%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-<?php echo $color; ?>-500 to-<?php echo $color; ?>-600 h-2 rounded-full transition-all duration-500" style="width: <?php echo $proficiency; ?>%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2"><?php echo htmlspecialchars($category); ?></p>
                 </div>
-                <div class="col-lg-6 text-lg-end">
-                    <?php if (!empty($profile['github'])): ?>
-                    <a class="btn btn-primary py-3 px-5" href="<?php echo $profile['github']; ?>" target="_blank">View All on GitHub</a>
-                    <?php endif; ?>
+                <?php 
+                            $colorIndex++;
+                        endforeach;
+                    endforeach;
+                endif;
+                ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Experience & Education</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">My professional journey and academic background</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Experience -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-briefcase text-blue-600 mr-3"></i>
+                        Work Experience
+                    </h3>
+                    <div class="space-y-6">
+                        <?php if (!empty($experience)): ?>
+                            <?php foreach ($experience as $exp): ?>
+                            <div class="bg-gray-50 p-6 rounded-xl card-hover">
+                                <h4 class="text-lg font-semibold text-gray-900"><?php echo htmlspecialchars($exp['position']); ?></h4>
+                                <p class="text-blue-600 font-medium mt-1"><?php echo htmlspecialchars($exp['company']); ?></p>
+                                <p class="text-sm text-gray-500 mt-2">
+                                    <?php 
+                                    echo date('M Y', strtotime($exp['start_date'])); 
+                                    echo ' - ';
+                                    echo $exp['end_date'] ? date('M Y', strtotime($exp['end_date'])) : 'Present';
+                                    ?>
+                                </p>
+                                <?php if (!empty($exp['description'])): ?>
+                                <p class="text-gray-600 mt-3 text-sm"><?php echo htmlspecialchars($exp['description']); ?></p>
+                                <?php endif; ?>
+                            </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p class="text-gray-500">Add your work experience from the admin panel.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-graduation-cap text-purple-600 mr-3"></i>
+                        Education
+                    </h3>
+                    <div class="space-y-6">
+                        <?php if (!empty($education)): ?>
+                            <?php foreach ($education as $edu): ?>
+                            <div class="bg-gray-50 p-6 rounded-xl card-hover">
+                                <h4 class="text-lg font-semibold text-gray-900"><?php echo htmlspecialchars($edu['degree']); ?></h4>
+                                <p class="text-purple-600 font-medium mt-1"><?php echo htmlspecialchars($edu['institution']); ?></p>
+                                <p class="text-sm text-gray-500 mt-2">
+                                    <?php 
+                                    echo date('Y', strtotime($edu['start_date'])); 
+                                    echo ' - ';
+                                    echo $edu['end_date'] ? date('Y', strtotime($edu['end_date'])) : 'Present';
+                                    ?>
+                                </p>
+                                <?php if (!empty($edu['cgpa'])): ?>
+                                <p class="text-sm text-gray-600 mt-2">CGPA: <span class="font-semibold"><?php echo htmlspecialchars($edu['cgpa']); ?></span></p>
+                                <?php endif; ?>
+                            </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p class="text-gray-500">Add your education details from the admin panel.</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
-            <div class="row g-4 portfolio-container wow fadeInUp" data-wow-delay="0.1s">
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Featured Projects</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Showcasing my recent work and achievements</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <?php if (!empty($projects)): ?>
                     <?php foreach ($projects as $project): ?>
-                    <div class="col-lg-4 col-md-6 portfolio-item">
-                        <div class="portfolio-img rounded overflow-hidden">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm card-hover">
+                        <div class="relative h-48 overflow-hidden group">
                             <?php if (!empty($project['image'])): ?>
-                            <img class="img-fluid" src="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" alt="<?php echo htmlspecialchars($project['title']); ?>">
+                            <img src="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" alt="<?php echo htmlspecialchars($project['title']); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                             <?php else: ?>
-                            <img class="img-fluid" src="<?php echo BASE_URL; ?>/public/assets/images/project-1.jpg" alt="">
+                            <div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-project-diagram text-white text-5xl"></i>
+                            </div>
                             <?php endif; ?>
-                            <div class="portfolio-btn">
-                                <?php if (!empty($project['image'])): ?>
-                                <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <?php endif; ?>
+                            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                                 <?php if (!empty($project['project_link'])): ?>
-                                <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="<?php echo $project['project_link']; ?>" target="_blank"><i class="fa fa-link"></i></a>
+                                <a href="<?php echo $project['project_link']; ?>" target="_blank" class="p-3 bg-white rounded-full hover:bg-blue-600 hover:text-white transition-colors">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
                                 <?php endif; ?>
                                 <?php if (!empty($project['github_link'])): ?>
-                                <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="<?php echo $project['github_link']; ?>" target="_blank"><i class="fab fa-github"></i></a>
+                                <a href="<?php echo $project['github_link']; ?>" target="_blank" class="p-3 bg-white rounded-full hover:bg-blue-600 hover:text-white transition-colors">
+                                    <i class="fab fa-github"></i>
+                                </a>
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <div class="pt-3">
-                            <h5 class="text-primary mb-2"><?php echo htmlspecialchars($project['title']); ?></h5>
-                            <p class="mb-2"><?php echo htmlspecialchars(substr($project['description'], 0, 100)); ?>...</p>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2"><?php echo htmlspecialchars($project['title']); ?></h3>
+                            <p class="text-gray-600 text-sm mb-4"><?php echo htmlspecialchars(substr($project['description'], 0, 120)); ?>...</p>
                             <?php if (!empty($project['technologies'])): ?>
-                            <small class="text-muted"><i class="fa fa-code me-2"></i><?php echo htmlspecialchars($project['technologies']); ?></small>
+                            <div class="flex flex-wrap gap-2">
+                                <?php foreach (array_slice(explode(',', $project['technologies']), 0, 4) as $tech): ?>
+                                <span class="text-xs px-3 py-1 bg-blue-50 text-blue-600 rounded-full font-medium"><?php echo htmlspecialchars(trim($tech)); ?></span>
+                                <?php endforeach; ?>
+                            </div>
                             <?php endif; ?>
                         </div>
                     </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <div class="col-12 text-center">
-                        <p>Add your projects from the admin panel.</p>
+                    <div class="col-span-3 text-center py-12">
+                        <p class="text-gray-500 text-lg">Add your projects from the admin panel.</p>
                     </div>
                 <?php endif; ?>
             </div>
         </div>
-    </div>
-    <!-- Projects End -->
+    </section>
 
     <?php if (!empty($testimonials)): ?>
-    <!-- Testimonial Start -->
-    <div class="container-fluid bg-light py-5 my-5" id="testimonial">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Testimonial</h1>
-            <div class="row justify-content-center">
-                <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="owl-carousel testimonial-carousel">
-                        <?php foreach ($testimonials as $testimonial): ?>
-                        <div class="testimonial-item text-center">
-                            <div class="position-relative mb-5">
-                                <?php if (!empty($testimonial['client_photo'])): ?>
-                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="<?php echo BASE_URL; ?>/public/uploads/testimonials/<?php echo $testimonial['client_photo']; ?>" alt="<?php echo htmlspecialchars($testimonial['client_name']); ?>" style="width: 100px; height: 100px; object-fit: cover;">
-                                <?php else: ?>
-                                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="<?php echo BASE_URL; ?>/public/assets/images/testimonial-1.jpg" alt="">
-                                <?php endif; ?>
-                                <div class="testimonial-icon">
-                                    <i class="fa fa-quote-left text-primary"></i>
-                                </div>
-                            </div>
-                            <p class="fs-5 fst-italic"><?php echo htmlspecialchars($testimonial['testimonial'] ?? $testimonial['content'] ?? ''); ?></p>
-                            <hr class="w-25 mx-auto">
-                            <h5><?php echo htmlspecialchars($testimonial['client_name']); ?></h5>
-                            <span><?php echo htmlspecialchars($testimonial['client_position'] ?? $testimonial['company'] ?? ''); ?></span>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Client Testimonials</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">What clients say about my work</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <?php foreach ($testimonials as $testimonial): ?>
+                <div class="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <?php if (!empty($testimonial['client_photo'])): ?>
+                        <img src="<?php echo BASE_URL; ?>/public/uploads/testimonials/<?php echo $testimonial['client_photo']; ?>" alt="<?php echo htmlspecialchars($testimonial['client_name']); ?>" class="w-16 h-16 rounded-full object-cover border-4 border-white shadow-md">
+                        <?php else: ?>
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl border-4 border-white shadow-md">
+                            <?php echo strtoupper(substr($testimonial['client_name'], 0, 1)); ?>
                         </div>
-                        <?php endforeach; ?>
+                        <?php endif; ?>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-900"><?php echo htmlspecialchars($testimonial['client_name']); ?></h4>
+                            <p class="text-sm text-gray-600"><?php echo htmlspecialchars($testimonial['client_position'] ?? $testimonial['company'] ?? ''); ?></p>
+                        </div>
                     </div>
+                    <p class="text-gray-600 italic leading-relaxed">"<?php echo htmlspecialchars($testimonial['testimonial'] ?? $testimonial['content'] ?? ''); ?>"</p>
+                    <?php if (!empty($testimonial['rating'])): ?>
+                    <div class="flex mt-4 text-yellow-400">
+                        <?php for($i = 0; $i < intval($testimonial['rating']); $i++): ?>
+                        <i class="fas fa-star"></i>
+                        <?php endfor; ?>
+                    </div>
+                    <?php endif; ?>
                 </div>
+                <?php endforeach; ?>
             </div>
         </div>
-    </div>
-    <!-- Testimonial End -->
+    </section>
     <?php endif; ?>
 
-    <!-- Contact Start -->
-    <div class="container-xxl pb-5" id="contact">
-        <div class="container py-5">
-            <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-lg-6">
-                    <h1 class="display-5 mb-0">Let's Work Together</h1>
-                </div>
-                <div class="col-lg-6 text-lg-end">
-                    <a class="btn btn-primary py-3 px-5" href="mailto:<?php echo htmlspecialchars($profile['email'] ?? ''); ?>">Say Hello</a>
-                </div>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-bold mb-4">Get In Touch</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">Let's discuss your project and bring your ideas to life</p>
             </div>
-            <div class="row g-5">
-                <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <?php if (!empty($profile['address'])): ?>
-                    <p class="mb-2">My office:</p>
-                    <h3 class="fw-bold"><?php echo htmlspecialchars($profile['address']); ?></h3>
-                    <hr class="w-100">
-                    <?php endif; ?>
-                    <?php if (!empty($profile['phone'])): ?>
-                    <p class="mb-2">Call me:</p>
-                    <h3 class="fw-bold"><?php echo htmlspecialchars($profile['phone']); ?></h3>
-                    <hr class="w-100">
-                    <?php endif; ?>
-                    <?php if (!empty($profile['email'])): ?>
-                    <p class="mb-2">Mail me:</p>
-                    <h3 class="fw-bold"><?php echo htmlspecialchars($profile['email']); ?></h3>
-                    <hr class="w-100">
-                    <?php endif; ?>
-                    <p class="mb-2">Follow me:</p>
-                    <div class="d-flex pt-2">
-                        <?php if (!empty($profile['twitter'])): ?>
-                        <a class="btn btn-square btn-primary me-2" href="<?php echo $profile['twitter']; ?>" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <?php endif; ?>
-                        <?php if (!empty($profile['linkedin'])): ?>
-                        <a class="btn btn-square btn-primary me-2" href="<?php echo $profile['linkedin']; ?>" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <?php endif; ?>
-                        <?php if (!empty($profile['github'])): ?>
-                        <a class="btn btn-square btn-primary me-2" href="<?php echo $profile['github']; ?>" target="_blank"><i class="fab fa-github"></i></a>
-                        <?php endif; ?>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        <div class="space-y-4">
+                            <?php if (!empty($profile['email'])): ?>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-sm">Email</p>
+                                    <p class="font-medium"><?php echo htmlspecialchars($profile['email']); ?></p>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                            <?php if (!empty($profile['phone'])): ?>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-phone text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-sm">Phone</p>
+                                    <p class="font-medium"><?php echo htmlspecialchars($profile['phone']); ?></p>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                            <?php if (!empty($profile['address'])): ?>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-sm">Location</p>
+                                    <p class="font-medium"><?php echo htmlspecialchars($profile['address']); ?></p>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold mb-4">Follow Me</h4>
+                        <div class="flex gap-3">
+                            <?php if (!empty($profile['github'])): ?>
+                            <a href="<?php echo $profile['github']; ?>" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <?php endif; ?>
+                            <?php if (!empty($profile['linkedin'])): ?>
+                            <a href="<?php echo $profile['linkedin']; ?>" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <?php endif; ?>
+                            <?php if (!empty($profile['twitter'])): ?>
+                            <a href="<?php echo $profile['twitter']; ?>" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <form id="contactForm" method="POST">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
-                                    <label for="name">Your Name</label>
-                                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-gray-800 p-8 rounded-xl">
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Your Name</label>
+                                <input type="text" name="name" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
-                                    <label for="email">Your Email</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject">
-                                    <label for="subject">Subject</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a message here" id="message" name="message" style="height: 100px" required></textarea>
-                                    <label for="message">Message</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary py-3 px-5" type="submit">Send Message</button>
-                            </div>
-                            <div class="col-12">
-                                <div id="formMessage" class="mt-3"></div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Your Email</label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
                             </div>
                         </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Subject</label>
+                            <input type="text" name="subject" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Message</label>
+                            <textarea name="message" rows="5" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                            Send Message
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <div id="formMessage" class="hidden mt-4 p-4 rounded-lg"></div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Contact End -->
+    </section>
 
-    <!-- Copyright Start -->
-    <div class="container-fluid bg-dark text-white py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="border-bottom text-secondary" href="#"><?php echo htmlspecialchars($profile['name'] ?? 'ProMan'); ?></a>, All Right Reserved.
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <div class="footer-menu">
-                        <a href="#home">Home</a>
-                        <a href="#about">About</a>
-                        <a href="#contact">Contact</a>
-                    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-300 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <p class="text-sm">© <?php echo date('Y'); ?> <?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?>. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#home" class="text-sm hover:text-blue-600 transition-colors">Home</a>
+                    <a href="#about" class="text-sm hover:text-blue-600 transition-colors">About</a>
+                    <a href="#projects" class="text-sm hover:text-blue-600 transition-colors">Projects</a>
+                    <a href="#contact" class="text-sm hover:text-blue-600 transition-colors">Contact</a>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Copyright End -->
+    </footer>
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-blue-700 flex items-center justify-center z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/lib/wow/wow.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/lib/easing/easing.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/lib/waypoints/waypoints.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/lib/typed/typed.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/lib/counterup/counterup.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/lib/lightbox/js/lightbox.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="<?php echo BASE_URL; ?>/public/assets/js/main.js"></script>
-    
     <script>
-    // Contact Form AJAX Handler
-    $(document).ready(function() {
-        $('#contactForm').on('submit', function(e) {
-            e.preventDefault();
-            
-            var form = $(this);
-            var formData = new FormData(this);
-            var submitBtn = form.find('button[type="submit"]');
-            var btnText = submitBtn.text();
-            var formMessage = $('#formMessage');
-            
-            submitBtn.prop('disabled', true).text('Sending...');
-            formMessage.removeClass('alert-success alert-danger').hide();
-            
-            $.ajax({
-                url: '<?php echo BASE_URL; ?>/contact',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                dataType: 'json',
-                success: function(response) {
-                    if (response.success) {
-                        formMessage.addClass('alert alert-success')
-                            .html('<i class="fa fa-check-circle me-2"></i>' + (response.message || 'Message sent successfully!'))
-                            .fadeIn();
-                        form[0].reset();
-                    } else {
-                        formMessage.addClass('alert alert-danger')
-                            .html('<i class="fa fa-exclamation-circle me-2"></i>' + (response.message || 'Failed to send message.'))
-                            .fadeIn();
-                    }
-                },
-                error: function() {
-                    formMessage.addClass('alert alert-danger')
-                        .html('<i class="fa fa-exclamation-circle me-2"></i>An error occurred. Please try again.')
-                        .fadeIn();
-                },
-                complete: function() {
-                    submitBtn.prop('disabled', false).text(btnText);
-                    setTimeout(function() {
-                        formMessage.fadeOut();
-                    }, 5000);
+        // Navigation
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const backToTop = document.getElementById('backToTop');
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white', 'shadow-sm');
+                navbar.classList.remove('bg-transparent');
+                backToTop.classList.remove('opacity-0', 'invisible');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-sm');
+                navbar.classList.add('bg-transparent');
+                backToTop.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    mobileMenu.classList.add('hidden');
                 }
             });
         });
-    });
+        
+        // Back to top
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Contact form
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const formMessage = document.getElementById('formMessage');
+            const btnText = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            formMessage.classList.add('hidden');
+            
+            try {
+                const response = await fetch('<?php echo BASE_URL; ?>/contact', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                formMessage.classList.remove('hidden');
+                if (data.success) {
+                    formMessage.className = 'mt-4 p-4 bg-green-600 text-white rounded-lg';
+                    formMessage.textContent = data.message || 'Message sent successfully!';
+                    form.reset();
+                } else {
+                    formMessage.className = 'mt-4 p-4 bg-red-600 text-white rounded-lg';
+                    formMessage.textContent = data.message || 'Failed to send message. Please try again.';
+                }
+            } catch (error) {
+                formMessage.classList.remove('hidden');
+                formMessage.className = 'mt-4 p-4 bg-red-600 text-white rounded-lg';
+                formMessage.textContent = 'An error occurred. Please try again.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = btnText;
+                setTimeout(() => formMessage.classList.add('hidden'), 5000);
+            }
+        });
     </script>
 </body>
 </html>
