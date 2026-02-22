@@ -345,76 +345,124 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Experience & Education</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">My professional journey and academic background</p>
-            </div>
+  <!-- Experience & Education Section -->
+<section id="experience" class="relative py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Experience -->
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                        <i class="fas fa-briefcase text-blue-600 mr-3"></i>
-                        Work Experience
-                    </h3>
-                    <div class="space-y-6">
-                        <?php if (!empty($experience)): ?>
-                            <?php foreach ($experience as $exp): ?>
-                            <div class="bg-gray-50 p-6 rounded-xl card-hover">
-                                <h4 class="text-lg font-semibold text-gray-900"><?php echo htmlspecialchars($exp['position']); ?></h4>
-                                <p class="text-blue-600 font-medium mt-1"><?php echo htmlspecialchars($exp['company']); ?></p>
-                                <p class="text-sm text-gray-500 mt-2">
-                                    <?php 
-                                    echo date('M Y', strtotime($exp['start_date'])); 
-                                    echo ' - ';
-                                    echo $exp['end_date'] ? date('M Y', strtotime($exp['end_date'])) : 'Present';
-                                    ?>
-                                </p>
-                                <?php if (!empty($exp['description'])): ?>
-                                <p class="text-gray-600 mt-3 text-sm"><?php echo htmlspecialchars($exp['description']); ?></p>
-                                <?php endif; ?>
-                            </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <p class="text-gray-500">Add your work experience from the admin panel.</p>
-                        <?php endif; ?>
-                    </div>
-                </div>
+<!-- Background glow -->
+<div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl"></div>
 
-                <!-- Education -->
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                        <i class="fas fa-graduation-cap text-purple-600 mr-3"></i>
-                        Education
-                    </h3>
-                    <div class="space-y-6">
-                        <?php if (!empty($education)): ?>
-                            <?php foreach ($education as $edu): ?>
-                            <div class="bg-gray-50 p-6 rounded-xl card-hover">
-                                <h4 class="text-lg font-semibold text-gray-900"><?php echo htmlspecialchars($edu['degree']); ?></h4>
-                                <p class="text-purple-600 font-medium mt-1"><?php echo htmlspecialchars($edu['institution']); ?></p>
-                                <p class="text-sm text-gray-500 mt-2">
-                                    <?php 
-                                    echo date('Y', strtotime($edu['start_date'])); 
-                                    echo ' - ';
-                                    echo $edu['end_date'] ? date('Y', strtotime($edu['end_date'])) : 'Present';
-                                    ?>
-                                </p>
-                                <?php if (!empty($edu['cgpa'])): ?>
-                                <p class="text-sm text-gray-600 mt-2">CGPA: <span class="font-semibold"><?php echo htmlspecialchars($edu['cgpa']); ?></span></p>
-                                <?php endif; ?>
-                            </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <p class="text-gray-500">Add your education details from the admin panel.</p>
-                        <?php endif; ?>
+<div class="max-w-7xl mx-auto relative">
+
+    <!-- Heading -->
+    <div class="text-center mb-20">
+        <span class="inline-block mb-4 px-4 py-1 text-sm font-semibold text-indigo-600 bg-indigo-100 rounded-full">
+            Career Path
+        </span>
+        <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            Experience & Education
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            My professional journey and academic background
+        </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-16">
+
+        <!-- WORK EXPERIENCE -->
+        <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-10 flex items-center">
+                <span class="w-10 h-10 flex items-center justify-center rounded-lg bg-blue-100 text-blue-600 mr-3">
+                    <i class="fas fa-briefcase"></i>
+                </span>
+                Work Experience
+            </h3>
+
+            <div class="relative space-y-10 border-l-2 border-blue-200 pl-8">
+                <?php if (!empty($experience)): ?>
+                    <?php foreach ($experience as $exp): ?>
+                    <div class="relative group">
+
+                        <!-- Dot -->
+                        <span class="absolute -left-[41px] top-6 w-4 h-4 bg-blue-600 rounded-full ring-4 ring-blue-100"></span>
+
+                        <div class="bg-white p-8 rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <h4 class="text-lg font-semibold text-gray-900">
+                                <?php echo htmlspecialchars($exp['position']); ?>
+                            </h4>
+                            <p class="text-blue-600 font-medium mt-1">
+                                <?php echo htmlspecialchars($exp['company']); ?>
+                            </p>
+
+                            <span class="inline-block mt-3 text-xs font-semibold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">
+                                <?php 
+                                    echo date('M Y', strtotime($exp['start_date'])) . ' - ' . 
+                                         ($exp['end_date'] ? date('M Y', strtotime($exp['end_date'])) : 'Present');
+                                ?>
+                            </span>
+
+                            <?php if (!empty($exp['description'])): ?>
+                            <p class="text-gray-600 mt-4 text-sm leading-relaxed">
+                                <?php echo htmlspecialchars($exp['description']); ?>
+                            </p>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-gray-500">Add your work experience from the admin panel.</p>
+                <?php endif; ?>
             </div>
         </div>
-    </section>
+
+        <!-- EDUCATION -->
+        <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-10 flex items-center">
+                <span class="w-10 h-10 flex items-center justify-center rounded-lg bg-purple-100 text-purple-600 mr-3">
+                    <i class="fas fa-graduation-cap"></i>
+                </span>
+                Education
+            </h3>
+
+            <div class="relative space-y-10 border-l-2 border-purple-200 pl-8">
+                <?php if (!empty($education)): ?>
+                    <?php foreach ($education as $edu): ?>
+                    <div class="relative group">
+
+                        <!-- Dot -->
+                        <span class="absolute -left-[41px] top-6 w-4 h-4 bg-purple-600 rounded-full ring-4 ring-purple-100"></span>
+
+                        <div class="bg-white p-8 rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <h4 class="text-lg font-semibold text-gray-900">
+                                <?php echo htmlspecialchars($edu['degree']); ?>
+                            </h4>
+                            <p class="text-purple-600 font-medium mt-1">
+                                <?php echo htmlspecialchars($edu['institution']); ?>
+                            </p>
+
+                            <span class="inline-block mt-3 text-xs font-semibold text-purple-600 bg-purple-100 px-3 py-1 rounded-full">
+                                <?php 
+                                    echo date('Y', strtotime($edu['start_date'])) . ' - ' . 
+                                         ($edu['end_date'] ? date('Y', strtotime($edu['end_date'])) : 'Present');
+                                ?>
+                            </span>
+
+                            <?php if (!empty($edu['cgpa'])): ?>
+                            <p class="text-sm text-gray-600 mt-4">
+                                CGPA: <span class="font-semibold"><?php echo htmlspecialchars($edu['cgpa']); ?></span>
+                            </p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-gray-500">Add your education details from the admin panel.</p>
+                <?php endif; ?>
+            </div>
+        </div>
+
+    </div>
+</div>
+</section>
 
     <!-- Services Section -->
     <?php
