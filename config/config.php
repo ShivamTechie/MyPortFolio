@@ -36,14 +36,14 @@ define('ADMIN_PATH', ROOT_PATH . '/admin');
 define('CSRF_TOKEN_NAME', 'csrf_token');
 define('SESSION_LIFETIME', 7200); // 2 hours
 
-// Email Configuration
 // Email Configuration (Hostinger)
 define('SMTP_HOST', 'smtp.hostinger.com');
 define('SMTP_PORT', 465);
-define('SMTP_USERNAME', 'skmwebworks.com@skmwebworks.com'); // your Hostinger email
-define('SMTP_PASSWORD', '@#Shivam@#2001');     // mailbox password
+define('SMTP_USERNAME', 'skmwebworks.com@skmwebworks.com');
+define('SMTP_PASSWORD', '@#Shivam@#2001');
 define('SMTP_FROM_EMAIL', 'skmwebworks.com@skmwebworks.com');
 define('SMTP_FROM_NAME', 'Shivam');
+define('ADMIN_EMAIL', 'shivamkk2001@gmail.com');
 
 // Upload Configuration
 define('MAX_FILE_SIZE', 5242880); // 5MB
