@@ -8,11 +8,12 @@ require_once ADMIN_PATH . '/controllers/BaseController.php';
 require_once APP_PATH . '/models/Profile.php';
 
 class ProfileController extends BaseController {
+
     private $profileModel;
 
     public function __construct() {
         $this->profileModel = new Profile();
-        
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->update();
         } else {
@@ -26,7 +27,7 @@ class ProfileController extends BaseController {
     public function index() {
         $profile = $this->profileModel->getProfile();
         $csrfToken = Session::generateCsrfToken();
-        
+
         require_once ADMIN_PATH . '/views/layout/header.php';
         require_once ADMIN_PATH . '/views/profile.php';
         require_once ADMIN_PATH . '/views/layout/footer.php';
@@ -36,132 +37,132 @@ class ProfileController extends BaseController {
      * Update Profile
      */
     public function update() {
-        // Start output buffering to catch any stray output
+
         ob_start();
-        
-        $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+
+        $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
                   strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-        
-        // Debug logging
-        error_log("=== ProfileController::update() called ===");
-        error_log("Is AJAX: " . ($isAjax ? 'YES' : 'NO'));
-        error_log("X-Requested-With: " . ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? 'NOT SET'));
-        
-        // Verify CSRF token
+
+        /* ===============================
+         * CSRF VALIDATION
+         * =============================== */
         if (!isset($_POST['csrf_token']) || !Session::verifyCsrfToken($_POST['csrf_token'])) {
-            if ($isAjax) {
-                ob_end_clean();
-                header('Content-Type: application/json');
-                echo json_encode(['success' => false, 'message' => 'Invalid request. Please refresh and try again.']);
-                exit;
-            }
             ob_end_clean();
-            Session::flash('error', 'Invalid request.', 'error');
-            header('Location: ' . ADMIN_URL . '?page=profile');
-            exit;
+            $this->jsonOrRedirect($isAjax, false, 'Invalid request. Please refresh and try again.');
         }
 
+        /* ===============================
+         * COLLECT FORM DATA
+         * =============================== */
         $data = [
-            'name' => $_POST['name'] ?? '',
-            'title' => $_POST['title'] ?? '',
-            'bio' => $_POST['bio'] ?? '',
-            'phone' => $_POST['phone'] ?? '',
-            'email' => $_POST['email'] ?? '',
-            'address' => $_POST['address'] ?? '',
-            'linkedin' => $_POST['linkedin'] ?? '',
-            'github' => $_POST['github'] ?? '',
-            'twitter' => $_POST['twitter'] ?? ''
+            'name'      => $_POST['name'] ?? '',
+            'title'     => $_POST['title'] ?? '',
+            'bio'       => $_POST['bio'] ?? '',
+            'phone'     => $_POST['phone'] ?? '',
+            'email'     => $_POST['email'] ?? '',
+            'address'   => $_POST['address'] ?? '',
+            'linkedin'  => $_POST['linkedin'] ?? '',
+            'github'    => $_POST['github'] ?? '',
+            'twitter'   => $_POST['twitter'] ?? ''
         ];
 
-        // Validate required fields
+        /* ===============================
+         * BASIC VALIDATION
+         * =============================== */
         if (empty($data['name']) || empty($data['title']) || empty($data['email'])) {
-            if ($isAjax) {
-                ob_end_clean();
-                header('Content-Type: application/json');
-                echo json_encode(['success' => false, 'message' => 'Please fill in all required fields.']);
-                exit;
-            }
             ob_end_clean();
-            Session::flash('error', 'Please fill in all required fields.', 'error');
-            header('Location: ' . ADMIN_URL . '?page=profile');
-            exit;
+            $this->jsonOrRedirect($isAjax, false, 'Please fill in all required fields.');
         }
 
-        // Handle profile image upload
-        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
-            require_once APP_PATH . '/core/Upload.php';
-            $upload = new Upload(UPLOAD_PATH . '/profile', ALLOWED_IMAGE_TYPES);
-            $imageName = $upload->upload($_FILES['profile_image']);
-            
+        require_once APP_PATH . '/core/Upload.php';
+
+        /* ===============================
+         * PROFILE IMAGE UPLOAD
+         * =============================== */
+        if (!empty($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+
+            $imageUpload = new Upload(
+                UPLOAD_PATH . '/profile',
+                ALLOWED_IMAGE_TYPES
+            );
+
+            $imageName = $imageUpload->upload($_FILES['profile_image']);
+
             if ($imageName) {
                 $data['profile_image'] = $imageName;
             } else {
-                if ($isAjax) {
-                    ob_end_clean();
-                    header('Content-Type: application/json');
-                    echo json_encode(['success' => false, 'message' => 'Failed to upload profile image.']);
-                    exit;
-                }
+                ob_end_clean();
+                $this->jsonOrRedirect($isAjax, false, 'Failed to upload profile image.');
             }
         }
 
-        // Handle resume upload
-        if (isset($_FILES['resume']) && $_FILES['resume']['error'] === UPLOAD_ERR_OK) {
-            require_once APP_PATH . '/core/Upload.php';
-            $upload = new Upload(UPLOAD_PATH . '/resume', ALLOWED_DOC_TYPES);
-            $resumeName = $upload->upload($_FILES['resume']);
-            
+        /* ===============================
+         * RESUME UPLOAD (DOC / DOCX / PDF)
+         * =============================== */
+        if (!empty($_FILES['resume']) && $_FILES['resume']['error'] === UPLOAD_ERR_OK) {
+
+            $resumeUpload = new Upload(
+                UPLOAD_PATH . '/resume',
+                ALLOWED_DOC_TYPES
+            );
+
+            $resumeName = $resumeUpload->upload($_FILES['resume']);
+
             if ($resumeName) {
                 $data['resume_path'] = $resumeName;
             } else {
-                if ($isAjax) {
-                    ob_end_clean();
-                    header('Content-Type: application/json');
-                    echo json_encode(['success' => false, 'message' => 'Failed to upload resume.']);
-                    exit;
-                }
+                ob_end_clean();
+                $this->jsonOrRedirect(
+                    $isAjax,
+                    false,
+                    'Invalid resume file. Please upload PDF, DOC, or DOCX.'
+                );
             }
         }
 
-        // Debug: Log the update attempt
-        error_log("Profile Update Data: " . print_r($data, true));
-        
+        /* ===============================
+         * UPDATE DATABASE
+         * =============================== */
         $result = $this->profileModel->updateProfile($data);
-        
-        // Debug: Log the result
-        error_log("Profile Update Result: " . ($result ? 'SUCCESS' : 'FAILED'));
-        
+
+        ob_end_clean();
+
         if ($result) {
-            if ($isAjax) {
-                // Clear any output buffer and send clean JSON
-                ob_end_clean();
-                header('Content-Type: application/json');
-                echo json_encode([
-                    'success' => true, 
-                    'message' => 'Profile updated successfully! ✓',
-                    'reload' => true,
-                    'updated_data' => $data
-                ]);
-                exit;
-            }
-            Session::flash('success', 'Profile updated successfully!', 'success');
+            $this->jsonOrRedirect(
+                $isAjax,
+                true,
+                'Profile updated successfully!',
+                ['reload' => true]
+            );
         } else {
-            if ($isAjax) {
-                // Clear any output buffer and send clean JSON
-                ob_end_clean();
-                header('Content-Type: application/json');
-                echo json_encode([
-                    'success' => false, 
-                    'message' => 'Failed to update profile. Database update failed.',
-                    'debug_data' => $data
-                ]);
-                exit;
-            }
-            Session::flash('error', 'Failed to update profile.', 'error');
+            $this->jsonOrRedirect(
+                $isAjax,
+                false,
+                'Failed to update profile.'
+            );
+        }
+    }
+
+    /**
+     * Helper: JSON (AJAX) or Redirect
+     */
+    private function jsonOrRedirect($isAjax, $success, $message, $extra = []) {
+
+        if ($isAjax) {
+            header('Content-Type: application/json');
+            echo json_encode(array_merge([
+                'success' => $success,
+                'message' => $message
+            ], $extra));
+            exit;
         }
 
-        // Clean buffer before redirect
-        ob_end_clean();
+        Session::flash(
+            $success ? 'success' : 'error',
+            $message,
+            $success ? 'success' : 'error'
+        );
+
         header('Location: ' . ADMIN_URL . '?page=profile');
         exit;
     }
