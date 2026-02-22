@@ -265,10 +265,12 @@
                 </div>
 
                 <!-- CTA -->
-                <a href="/assets/cv/Shivam-CV.pdf" download
-                   class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:scale-105 transition">
-                    <i class="fas fa-download"></i> Download CV
-                </a>
+                <?php if (!empty($profile['resume_path'])): ?>
+                        <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" download class="inline-flex items-center border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 rounded-lg text-base font-medium transition-all duration-300">
+                            <i class="fas fa-download mr-2"></i>
+                            Download CV
+                        </a>
+                        <?php endif; ?>
             </div>
 
             <!-- RIGHT STATS -->
