@@ -417,35 +417,71 @@
     </section>
 
     <!-- Services Section -->
-    <?php if (!empty($services)): ?>
-    <section id="services" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">My Services</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">What I can do for you</p>
+    <?php
+    $iconMap = [
+    'code'         => 'fa-solid fa-code',
+    'wordpress'    => 'fa-brands fa-wordpress',
+    'edit'         => 'fa-solid fa-pen-to-square',
+    'settings'     => 'fa-solid fa-gear',
+    'trending-up'  => 'fa-solid fa-chart-line',
+    'api'          => 'fa-solid fa-plug'
+    ];
+    ?>
+  <?php if (!empty($services)): ?>
+<section id="services" class="relative py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+
+    <!-- Background glow -->
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto relative">
+
+        <!-- Heading -->
+        <div class="text-center mb-20">
+            <span class="inline-block mb-4 px-4 py-1 text-sm font-semibold text-blue-600 bg-blue-100 rounded-full">
+                Services
+            </span>
+            <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+                What I Can Do For You
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                High-quality services tailored to help your business grow digitally
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            <?php foreach ($services as $service): 
+                $iconClass = $iconMap[$service['icon']] ?? 'fa-solid fa-star';
+            ?>
+
+            <div class="group bg-white p-10 rounded-2xl border shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+
+                <!-- Icon -->
+                <div class="w-16 h-16 flex items-center justify-center rounded-xl mb-6
+                            bg-gradient-to-br from-blue-600 to-indigo-600 text-white
+                            shadow-lg group-hover:scale-110 transition">
+                    <i class="<?php echo $iconClass; ?> text-2xl"></i>
+                </div>
+
+                <!-- Title -->
+                <h3 class="text-xl font-bold text-gray-900 mb-3">
+                    <?php echo htmlspecialchars($service['title']); ?>
+                </h3>
+
+                <!-- Description -->
+                <p class="text-gray-600 leading-relaxed">
+                    <?php echo htmlspecialchars($service['description']); ?>
+                </p>
+
+                <!-- Bottom accent -->
+                <div class="mt-6 h-1 w-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"></div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <?php 
-                $iconClasses = ['fa-code', 'fa-wordpress', 'fa-paint-brush', 'fa-chart-line', 'fa-mobile-alt', 'fa-cogs'];
-                $iconIndex = 0;
-                foreach ($services as $service): 
-                ?>
-                <div class="bg-gradient-to-br from-gray-50 to-blue-50 p-8 rounded-xl card-hover">
-                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6 text-white text-2xl">
-                        <i class="fas <?php echo !empty($service['icon']) ? htmlspecialchars($service['icon']) : $iconClasses[$iconIndex % count($iconClasses)]; ?>"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3"><?php echo htmlspecialchars($service['title']); ?></h3>
-                    <p class="text-gray-600 leading-relaxed"><?php echo htmlspecialchars($service['description']); ?></p>
-                </div>
-                <?php 
-                    $iconIndex++;
-                endforeach; 
-                ?>
-            </div>
+            <?php endforeach; ?>
         </div>
-    </section>
-    <?php endif; ?>
+    </div>
+</section>
+<?php endif; ?>
 
     <!-- Projects Section -->
     <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
