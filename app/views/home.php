@@ -346,7 +346,7 @@
 
     <!-- Experience Section -->
   <!-- Experience & Education Section -->
-<section id="experience" class="relative py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section id="experience" class="relative py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
 
 <!-- Background glow -->
 <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl"></div>
@@ -532,59 +532,101 @@
 <?php endif; ?>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Featured Projects</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Showcasing my recent work and achievements</p>
+   <!-- Projects Section -->
+<section id="projects" class="relative py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+
+<!-- Three.js will render here -->
+<div id="projects-3d" class="absolute inset-0 -z-10"></div>
+
+<div class="max-w-7xl mx-auto relative z-10">
+
+    <!-- Heading -->
+    <div class="text-center mb-20">
+        <span class="inline-block mb-4 px-4 py-1 text-sm font-semibold text-blue-600 bg-blue-100 rounded-full">
+            Portfolio
+        </span>
+        <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            Featured Projects
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Showcasing my real-world work and problem-solving experience
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+        <?php if (!empty($projects)): ?>
+            <?php foreach ($projects as $project): ?>
+
+            <div class="group bg-white/80 backdrop-blur-xl rounded-2xl overflow-hidden
+                        border border-white/40 shadow-lg
+                        hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+
+                <!-- Image -->
+                <div class="relative h-56 overflow-hidden">
+                    <?php if (!empty($project['image'])): ?>
+                        <img src="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>"
+                             alt="<?php echo htmlspecialchars($project['title']); ?>"
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <?php else: ?>
+                        <div class="w-full h-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                            <i class="fas fa-cube text-white text-6xl opacity-80"></i>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Content -->
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                        <?php echo htmlspecialchars($project['title']); ?>
+                    </h3>
+
+                    <!-- FULL DESCRIPTION (NOT CUT) -->
+                    <p class="text-gray-700 text-sm leading-relaxed mb-6">
+                        <?php echo nl2br(htmlspecialchars($project['description'])); ?>
+                    </p>
+
+                    <!-- Technologies -->
+                    <?php if (!empty($project['technologies'])): ?>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <?php foreach (explode(',', $project['technologies']) as $tech): ?>
+                                <span class="text-xs px-3 py-1 rounded-full bg-blue-100 text-blue-700 font-medium">
+                                    <?php echo htmlspecialchars(trim($tech)); ?>
+                                </span>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Links -->
+                    <div class="flex gap-4">
+                        <?php if (!empty($project['project_link'])): ?>
+                            <a href="<?php echo $project['project_link']; ?>" target="_blank"
+                               class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition">
+                                Live Project
+                            </a>
+                        <?php endif; ?>
+
+                        <?php if (!empty($project['github_link'])): ?>
+                            <a href="<?php echo $project['github_link']; ?>" target="_blank"
+                               class="px-4 py-2 rounded-lg bg-gray-900 text-white text-sm font-semibold hover:bg-black transition">
+                                GitHub
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <?php if (!empty($projects)): ?>
-                    <?php foreach ($projects as $project): ?>
-                    <div class="bg-white rounded-xl overflow-hidden shadow-sm card-hover">
-                        <div class="relative h-48 overflow-hidden group">
-                            <?php if (!empty($project['image'])): ?>
-                            <img src="<?php echo BASE_URL; ?>/public/uploads/projects/<?php echo $project['image']; ?>" alt="<?php echo htmlspecialchars($project['title']); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                            <?php else: ?>
-                            <div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                                <i class="fas fa-project-diagram text-white text-5xl"></i>
-                            </div>
-                            <?php endif; ?>
-                            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                                <?php if (!empty($project['project_link'])): ?>
-                                <a href="<?php echo $project['project_link']; ?>" target="_blank" class="p-3 bg-white rounded-full hover:bg-blue-600 hover:text-white transition-colors">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <?php endif; ?>
-                                <?php if (!empty($project['github_link'])): ?>
-                                <a href="<?php echo $project['github_link']; ?>" target="_blank" class="p-3 bg-white rounded-full hover:bg-blue-600 hover:text-white transition-colors">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-900 mb-2"><?php echo htmlspecialchars($project['title']); ?></h3>
-                            <p class="text-gray-600 text-sm mb-4"><?php echo htmlspecialchars(substr($project['description'], 0, 120)); ?>...</p>
-                            <?php if (!empty($project['technologies'])): ?>
-                            <div class="flex flex-wrap gap-2">
-                                <?php foreach (array_slice(explode(',', $project['technologies']), 0, 4) as $tech): ?>
-                                <span class="text-xs px-3 py-1 bg-blue-50 text-blue-600 rounded-full font-medium"><?php echo htmlspecialchars(trim($tech)); ?></span>
-                                <?php endforeach; ?>
-                            </div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="col-span-3 text-center py-12">
-                        <p class="text-gray-500 text-lg">Add your projects from the admin panel.</p>
-                    </div>
-                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="col-span-3 text-center py-20">
+                <p class="text-gray-500 text-lg">Add your projects from the admin panel.</p>
             </div>
-        </div>
-    </section>
+        <?php endif; ?>
+
+    </div>
+</div>
+</section>
 
     <?php if (!empty($testimonials)): ?>
     <!-- Testimonials Section -->
@@ -868,6 +910,71 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCount();
   });
 });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+const container = document.getElementById('projects-3d');
+if (container) {
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+        60,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        1000
+    );
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    camera.position.z = 6;
+
+    // 3D Object
+    const geometry = new THREE.IcosahedronGeometry(2.8, 1);
+    const material = new THREE.MeshPhysicalMaterial({
+        color: 0x6366f1,
+        roughness: 0.3,
+        metalness: 0.2,
+        transparent: true,
+        opacity: 0.18
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    // Lights
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+
+    const light = new THREE.PointLight(0xffffff, 1);
+    light.position.set(5, 5, 5);
+    scene.add(light);
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+        mesh.rotation.x += 0.002 + mouseY;
+        mesh.rotation.y += 0.003 + mouseX;
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+}
 </script>
 </body>
 </html>
