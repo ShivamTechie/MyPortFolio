@@ -199,7 +199,7 @@
                                     <?php if (!empty($profile['profile_image'])): ?>
                                     <img src="<?php echo BASE_URL; ?>/public/uploads/profile/<?php echo $profile['profile_image']; ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>" class="w-full h-auto rounded-2xl object-cover shadow-2xl">
                                     <?php else: ?>
-                                    <img src="<?php echo BASE_URL; ?>/public/assets/images/profile.png" alt="Profile" class="w-full h-auto rounded-2xl object-cover shadow-2xl">
+                                    <img src="<?php echo BASE_URL; ?>/public/assets/images/shivam.jpg" alt="Profile" class="w-full h-auto rounded-2xl object-cover shadow-2xl">
                                     <?php endif; ?>
                                 </div>
                             </div>
