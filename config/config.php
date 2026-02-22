@@ -5,16 +5,16 @@
  */
 
 // Database Configuration
-define('DB_HOST', '127.0.0.1');
+define('DB_HOST', 'localhost');
 define('DB_NAME', 'u943540838_Shivam_port');
 define('DB_USER', 'u943540838_shivam');
-define('DB_PASS', '@#Shivam@#2001');
+define('DB_PASS', '@#Chippu@#2001');
 define('DB_CHARSET', 'utf8mb4');
 
 // Application Configuration
 define('APP_NAME', 'Shivam Kumar - Portfolio');
 define('APP_ENV', 'production'); // development, production
-define('APP_DEBUG', true);
+define('APP_DEBUG', false);
 
 // URL Configuration
 define('BASE_URL', 'https://skmwebworks.com');
@@ -25,7 +25,11 @@ define('ROOT_PATH', dirname(__DIR__));
 define('APP_PATH', ROOT_PATH . '/app');
 define('PUBLIC_PATH', ROOT_PATH . '/public');
 define('UPLOAD_PATH', PUBLIC_PATH . '/uploads');
-
+define('ALLOWED_DOC_TYPES', [
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+]);
 define('ADMIN_PATH', ROOT_PATH . '/admin');
 
 // Security Configuration
