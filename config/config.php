@@ -48,7 +48,7 @@ define('ADMIN_EMAIL', 'shivamkk2001@gmail.com');
 // Upload Configuration
 define('MAX_FILE_SIZE', 5242880); // 5MB
 define('ALLOWED_IMAGE_TYPES', ['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
-define('ALLOWED_DOC_TYPES', ['application/pdf']);
+
 
 // Timezone
 date_default_timezone_set('Asia/Kolkata');
