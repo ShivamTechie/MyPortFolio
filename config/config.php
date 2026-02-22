@@ -8,7 +8,7 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'u943540838_Shivam_port');
 define('DB_USER', 'u943540838_shivam');
-define('DB_PASS', '@#Chippu@#2001');
+define('DB_PASS', 'Chippu2001');
 define('DB_CHARSET', 'utf8mb4');
 
 // Application Configuration
