@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($pageTitle) ? $pageTitle . ' - ' : ''; ?>Admin Panel</title>
+    
+    <!-- Favicon -->
+    <link href="<?php echo BASE_URL; ?>/public/assets/images/logo.png" rel="icon" type="image/png">
+    <link href="<?php echo BASE_URL; ?>/public/assets/images/logo.png" rel="apple-touch-icon">
+    
     <link rel="stylesheet" href="<?php echo ADMIN_URL; ?>/assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -11,7 +16,10 @@
     <div class="admin-wrapper">
         <nav class="sidebar">
             <div class="sidebar-header">
-                <h2>Portfolio Admin</h2>
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                    <img src="<?php echo BASE_URL; ?>/public/assets/images/logo.png" alt="Logo" style="height: 40px; width: 40px;">
+                    <h2 style="margin: 0;">Admin</h2>
+                </div>
                 <p>Welcome, <?php echo Session::get('username'); ?></p>
             </div>
             

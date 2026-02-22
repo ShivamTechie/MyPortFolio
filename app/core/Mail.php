@@ -88,9 +88,13 @@ class Mail {
      * HTML Template — Admin Notification
      */
     private function adminTemplate(array $data): string {
+        $logoUrl = BASE_URL . '/public/assets/images/logo.png';
         return "
         <div style='font-family: Arial, sans-serif; background:#f5f7fa; padding:30px'>
             <div style='max-width:600px; background:#ffffff; margin:auto; border-radius:8px; padding:30px'>
+                <div style='text-align:center; margin-bottom:30px'>
+                    <img src='{$logoUrl}' alt='Logo' style='height:60px; width:60px;'>
+                </div>
                 <h2 style='color:#111827; margin-bottom:20px'>📩 New Contact Message</h2>
 
                 <p><strong>Name:</strong> {$data['name']}</p>
@@ -117,9 +121,13 @@ class Mail {
      * HTML Template — User Auto Reply
      */
     private function userTemplate(array $data): string {
+        $logoUrl = BASE_URL . '/public/assets/images/logo.png';
         return "
         <div style='font-family: Arial, sans-serif; background:#f5f7fa; padding:30px'>
             <div style='max-width:600px; background:#ffffff; margin:auto; border-radius:8px; padding:30px'>
+                <div style='text-align:center; margin-bottom:30px'>
+                    <img src='{$logoUrl}' alt='Logo' style='height:60px; width:60px;'>
+                </div>
                 <h2 style='color:#111827; margin-bottom:20px'>Hi {$data['name']} 👋</h2>
 
                 <p style='color:#374151; line-height:1.6'>

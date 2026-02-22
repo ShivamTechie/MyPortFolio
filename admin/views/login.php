@@ -4,12 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - <?php echo APP_NAME; ?></title>
+    
+    <!-- Favicon -->
+    <link href="<?php echo BASE_URL; ?>/public/assets/images/logo.png" rel="icon" type="image/png">
+    <link href="<?php echo BASE_URL; ?>/public/assets/images/logo.png" rel="apple-touch-icon">
+    
     <link rel="stylesheet" href="<?php echo ADMIN_URL; ?>/assets/css/login.css">
 </head>
 <body>
     <div class="login-container">
         <div class="login-box">
             <div class="login-header">
+                <img src="<?php echo BASE_URL; ?>/public/assets/images/logo.png" alt="Logo" style="height: 60px; width: 60px; margin: 0 auto 20px;">
                 <h1>Admin Panel</h1>
                 <p>Portfolio Management System</p>
             </div>

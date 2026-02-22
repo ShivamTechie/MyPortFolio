@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?> - <?php echo htmlspecialchars($profile['title'] ?? 'Developer'); ?></title>
     <meta name="description" content="<?php echo htmlspecialchars($profile['bio'] ?? ''); ?>">
-    <!-- AOS Animation -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-<!-- Font Awesome (you already use it, but ensure latest) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Favicon -->
+    <link href="<?php echo BASE_URL; ?>/public/assets/images/logo.png" rel="icon" type="image/png">
+    <link href="<?php echo BASE_URL; ?>/public/assets/images/logo.png" rel="apple-touch-icon">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -79,8 +82,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
-                <a href="#home" class="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
-                    <?php echo htmlspecialchars(explode(' ', $profile['name'] ?? 'Portfolio')[0]); ?><span class="text-blue-600">.</span>
+                <a href="#home" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+                    <img src="<?php echo BASE_URL; ?>/public/assets/images/logo.png" alt="Logo" class="h-10 w-10">
+                    <span class="text-2xl font-bold text-gray-900"><?php echo htmlspecialchars(explode(' ', $profile['name'] ?? 'Portfolio')[0]); ?></span>
                 </a>
 
                 <!-- Desktop Navigation -->
@@ -773,16 +777,25 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-950 text-gray-300 py-8 px-4 sm:px-6 lg:px-8">
+    <footer class="bg-gray-950 text-gray-300 py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <p class="text-sm">© <?php echo date('Y'); ?> <?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?>. All rights reserved.</p>
-                <div class="flex gap-6 mt-4 md:mt-0">
-                    <a href="#home" class="text-sm hover:text-blue-600 transition-colors">Home</a>
-                    <a href="#about" class="text-sm hover:text-blue-600 transition-colors">About</a>
-                    <a href="#projects" class="text-sm hover:text-blue-600 transition-colors">Projects</a>
-                    <a href="#contact" class="text-sm hover:text-blue-600 transition-colors">Contact</a>
+            <div class="flex flex-col items-center text-center space-y-6">
+                <!-- Footer Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="<?php echo BASE_URL; ?>/public/assets/images/logo.png" alt="Logo" class="h-12 w-12">
+                    <span class="text-2xl font-bold text-white"><?php echo htmlspecialchars(explode(' ', $profile['name'] ?? 'Portfolio')[0]); ?></span>
                 </div>
+                
+                <!-- Footer Links -->
+                <div class="flex gap-8">
+                    <a href="#home" class="text-sm hover:text-blue-400 transition-colors">Home</a>
+                    <a href="#about" class="text-sm hover:text-blue-400 transition-colors">About</a>
+                    <a href="#projects" class="text-sm hover:text-blue-400 transition-colors">Projects</a>
+                    <a href="#contact" class="text-sm hover:text-blue-400 transition-colors">Contact</a>
+                </div>
+                
+                <!-- Copyright -->
+                <p class="text-sm text-gray-400">© <?php echo date('Y'); ?> <?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?>. All rights reserved.</p>
             </div>
         </div>
     </footer>
