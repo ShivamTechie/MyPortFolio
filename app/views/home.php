@@ -159,26 +159,10 @@
                             <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                         <?php if (!empty($profile['resume_path'])): ?>
-                            <?php
-$defaultResume = 'Shivam_Resume_2026.docx';
-
-$resumeFile = !empty($profile['resume_path']) 
-    ? $profile['resume_path'] 
-    : $defaultResume;
-
-$resumeFullPath = $_SERVER['DOCUMENT_ROOT'] . BASE_URL . '/public/uploads/resume/' . $resumeFile;
-
-// If file does not exist on server, force fallback
-if (!file_exists($resumeFullPath)) {
-    $resumeFile = $defaultResume;
-}
-?>
-                      <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $resumeFile; ?>"
-   download
-   class="inline-flex items-center border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 rounded-lg text-base font-medium transition-all duration-300">
-    <i class="fas fa-download mr-2"></i>
-    Download CV
-</a>
+                        <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" download class="inline-flex items-center border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 rounded-lg text-base font-medium transition-all duration-300">
+                            <i class="fas fa-download mr-2"></i>
+                            Download CV
+                        </a>
                         <?php endif; ?>
                     </div>
 
