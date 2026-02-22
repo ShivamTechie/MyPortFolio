@@ -159,7 +159,7 @@
                             <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                         <?php if (!empty($profile['resume_path'])): ?>
-                        <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" download class="inline-flex items-center border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 rounded-lg text-base font-medium transition-all duration-300">
+                        <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" download class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-base font-medium transition-all duration-300 hover:shadow-lg">
                             <i class="fas fa-download mr-2"></i>
                             Download CV
                         </a>
@@ -266,7 +266,7 @@
 
                 <!-- CTA -->
                 <?php if (!empty($profile['resume_path'])): ?>
-                        <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" download class="inline-flex items-center border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 rounded-lg text-base font-medium transition-all duration-300">
+                        <a href="<?php echo BASE_URL; ?>/public/uploads/resume/<?php echo $profile['resume_path']; ?>" download class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-base font-medium transition-all duration-300 hover:shadow-lg">
                             <i class="fas fa-download mr-2"></i>
                             Download CV
                         </a>
