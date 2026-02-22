@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?> - <?php echo htmlspecialchars($profile['title'] ?? 'Developer'); ?></title>
     <meta name="description" content="<?php echo htmlspecialchars($profile['bio'] ?? ''); ?>">
-    
+    <!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- Font Awesome (you already use it, but ensure latest) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -211,60 +215,89 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">About Me</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Get to know more about my background and expertise</p>
-            </div>
+  <!-- About Section -->
+<section id="about" class="relative py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    
+    <!-- Gradient Blob -->
+    <div class="absolute -top-32 -right-32 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <p class="text-lg text-gray-600 leading-relaxed">
-                        <?php echo nl2br(htmlspecialchars($profile['bio'] ?? '')); ?>
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-4 pt-4">
-                        <div>
-                            <p class="text-sm text-gray-500 mb-1">Email</p>
-                            <p class="font-medium text-gray-900"><?php echo htmlspecialchars($profile['email'] ?? ''); ?></p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 mb-1">Phone</p>
-                            <p class="font-medium text-gray-900"><?php echo htmlspecialchars($profile['phone'] ?? ''); ?></p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 mb-1">Location</p>
-                            <p class="font-medium text-gray-900"><?php echo htmlspecialchars($profile['address'] ?? ''); ?></p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 mb-1">Experience</p>
-                            <p class="font-medium text-gray-900">2+ Years</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-6">
-                    <?php 
-                    $stats = [
-                        ['label' => 'Years Experience', 'value' => '2+', 'icon' => 'fa-calendar-alt'],
-                        ['label' => 'Happy Clients', 'value' => count($testimonials ?? []) * 10 ?: '50+', 'icon' => 'fa-users'],
-                        ['label' => 'Projects Done', 'value' => count($projects ?? []) ?: '10+', 'icon' => 'fa-project-diagram'],
-                        ['label' => 'Technologies', 'value' => '10+', 'icon' => 'fa-code']
-                    ];
-                    foreach ($stats as $stat): ?>
-                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl text-center card-hover">
-                        <div class="text-blue-600 mb-3">
-                            <i class="fas <?php echo $stat['icon']; ?> text-3xl"></i>
-                        </div>
-                        <div class="text-3xl font-bold text-gray-900 mb-1"><?php echo $stat['value']; ?></div>
-                        <div class="text-sm text-gray-600"><?php echo $stat['label']; ?></div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
+    <div class="max-w-7xl mx-auto relative">
+        
+        <!-- Heading -->
+        <div class="text-center mb-20" data-aos="fade-up">
+            <span class="inline-block mb-4 px-4 py-1 text-sm font-semibold text-blue-600 bg-blue-100 rounded-full">
+                About Me
+            </span>
+            <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+                Building Ideas Into Reality
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Passionate developer crafting scalable, modern, and impactful digital experiences
+            </p>
         </div>
-    </section>
+
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            
+            <!-- LEFT -->
+            <div data-aos="fade-right">
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                    <?php echo nl2br(htmlspecialchars($profile['bio'] ?? '')); ?>
+                </p>
+
+                <!-- Info -->
+                <div class="grid sm:grid-cols-2 gap-6 mb-8">
+                    <div class="p-5 bg-white rounded-xl border shadow-sm hover:shadow-md transition">
+                        <p class="text-xs uppercase tracking-wide text-gray-500">Email</p>
+                        <p class="font-semibold"><?php echo htmlspecialchars($profile['email'] ?? ''); ?></p>
+                    </div>
+                    <div class="p-5 bg-white rounded-xl border shadow-sm hover:shadow-md transition">
+                        <p class="text-xs uppercase tracking-wide text-gray-500">Phone</p>
+                        <p class="font-semibold"><?php echo htmlspecialchars($profile['phone'] ?? ''); ?></p>
+                    </div>
+                    <div class="p-5 bg-white rounded-xl border shadow-sm hover:shadow-md transition">
+                        <p class="text-xs uppercase tracking-wide text-gray-500">Location</p>
+                        <p class="font-semibold"><?php echo htmlspecialchars($profile['address'] ?? ''); ?></p>
+                    </div>
+                    <div class="p-5 bg-white rounded-xl border shadow-sm hover:shadow-md transition">
+                        <p class="text-xs uppercase tracking-wide text-gray-500">Experience</p>
+                        <p class="font-semibold">2+ Years</p>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <a href="/assets/cv/Shivam-CV.pdf" download
+                   class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:scale-105 transition">
+                    <i class="fas fa-download"></i> Download CV
+                </a>
+            </div>
+
+            <!-- RIGHT STATS -->
+            <div class="grid grid-cols-2 gap-6" data-aos="fade-left">
+                <?php 
+                $stats = [
+                    ['label' => 'Years Experience', 'value' => 2, 'icon' => 'fa-calendar-alt', 'color' => 'blue'],
+                    ['label' => 'Happy Clients', 'value' => 50, 'icon' => 'fa-users', 'color' => 'green'],
+                    ['label' => 'Projects Done', 'value' => 10, 'icon' => 'fa-project-diagram', 'color' => 'purple'],
+                    ['label' => 'Technologies', 'value' => 10, 'icon' => 'fa-code', 'color' => 'pink'],
+                ];
+                foreach ($stats as $stat): ?>
+                
+                <div class="bg-white p-8 rounded-2xl border shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
+                    <div class="w-14 h-14 flex items-center justify-center rounded-xl mb-4 bg-<?php echo $stat['color']; ?>-100 text-<?php echo $stat['color']; ?>-600">
+                        <i class="fas <?php echo $stat['icon']; ?> text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-bold text-gray-900">
+                        <span data-count="<?php echo $stat['value']; ?>">0</span>+
+                    </div>
+                    <div class="text-sm text-gray-600 mt-1"><?php echo $stat['label']; ?></div>
+                </div>
+
+                <?php endforeach; ?>
+            </div>
+
+        </div>
+    </div>
+</section>
 
     <!-- Skills Section -->
     <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
@@ -720,5 +753,35 @@
             }
         });
     </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 900,
+    once: true,
+    easing: 'ease-out-cubic'
+  });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll('[data-count]');
+  const speed = 80;
+
+  counters.forEach(counter => {
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-count');
+      const count = +counter.innerText;
+      const inc = Math.ceil(target / speed);
+
+      if (count < target) {
+        counter.innerText = count + inc;
+        setTimeout(updateCount, 20);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    updateCount();
+  });
+});
+</script>
 </body>
 </html>
