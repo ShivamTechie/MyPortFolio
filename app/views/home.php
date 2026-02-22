@@ -282,7 +282,12 @@
                     foreach ($skills as $category => $categorySkills):
                         foreach ($categorySkills as $skill):
                             $color = $colors[$colorIndex % count($colors)];
-                            $proficiency = isset($skill['proficiency']) ? intval($skill['proficiency']) : 90;
+                            $proficiencyMap = [
+                                'Beginner' => 40,
+                                'Intermediate' => 70,
+                                'Expert' => 90
+                            ];
+                            $proficiency = $proficiencyMap[$skill['proficiency']] ?? 0;
                 ?>
                 <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-between mb-3">
