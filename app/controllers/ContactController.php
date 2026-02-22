@@ -55,7 +55,7 @@ class ContactController extends Controller {
             if (!empty(SMTP_USERNAME) && !empty(SMTP_PASSWORD)) {
                 try {
                     $mail = new Mail();
-                    $mail->sendContactEmail($data);
+                    $mail->sendContactEmails($data);
                 } catch (Exception $e) {
                     // Log error but don't fail the request
                 }

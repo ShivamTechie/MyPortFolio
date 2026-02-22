@@ -37,13 +37,13 @@ define('CSRF_TOKEN_NAME', 'csrf_token');
 define('SESSION_LIFETIME', 7200); // 2 hours
 
 // Email Configuration
-define('SMTP_HOST', 'smtp.gmail.com');
-define('SMTP_PORT', 587);
-define('SMTP_USERNAME', ''); // Set your Gmail address
-define('SMTP_PASSWORD', ''); // Set your Gmail App Password
-define('SMTP_FROM_EMAIL', 'shivamkk2001@gmail.com');
-define('SMTP_FROM_NAME', 'Shivam Kumar');
-define('ADMIN_EMAIL', 'shivamkk2001@gmail.com');
+// Email Configuration (Hostinger)
+define('SMTP_HOST', 'smtp.hostinger.com');
+define('SMTP_PORT', 465);
+define('SMTP_USERNAME', 'skmwebworks.com@skmwebworks.com'); // your Hostinger email
+define('SMTP_PASSWORD', '@#Shivam@#2001');     // mailbox password
+define('SMTP_FROM_EMAIL', 'skmwebworks.com@skmwebworks.com');
+define('SMTP_FROM_NAME', 'Shivam');
 
 // Upload Configuration
 define('MAX_FILE_SIZE', 5242880); // 5MB
